@@ -1,0 +1,18 @@
+#ifndef SPEEDINFO_H
+#define SPEEDINFO_H
+
+class QString;
+
+class SpeedInfo
+{
+public:
+    SpeedInfo();
+
+    bool systemTime(QString &startup, QString &free);
+    bool cpuSpeed(long &cpu);
+    bool memorySpeed(long &memory, long &swap);
+    bool diskSpeed(long &read, long &write);
+    bool netSpeed(long &netUpdate, long &netDown);
+};
+
+#endif // SPEEDINFO_H
