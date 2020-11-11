@@ -32,12 +32,13 @@ public:
 
     void init();
     bool systemTime(QString &startup, QString &free);
-    bool cpuRate(long &cpu);
+    double cpuRate(int decimalsNum = 2, int ms = 1000);
     bool memoryRate(long &memory, long &swap);
     bool diskRate(long &read, long &write);
     void netRate(double &down, double &upload, QString &downUnit, QString &uploadUnit, int decimalsNum = 2, int ms = 1000, Sensitive sensitive = SpeedInfo::Default);
 
 private:
+    void cpuRate(long &cpuAll, long &cpuFree);
     bool netRate(long &netDown, long &netUpload);
     QString setRateUnitSensitive(RateUnit unit, Sensitive sensitive = SpeedInfo::Default);
     double autoRateUnits(long speed, RateUnit &unit);

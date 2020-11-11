@@ -25,6 +25,58 @@ void SpeedInfo::init()
     m_timer = new QTimer(this);
 }
 
+double SpeedInfo::cpuRate(int decimalsNum, int ms)
+{
+    bool ok = false;
+    double cpu = 0;
+    long cpuAll = 0;
+    long cpuFree = 0;
+    long oldCpuAll = 0;
+    long oldCpuFree = 0;
+
+    // 实际第一次不准确,第二次开始才是准确的.
+    while (true) {
+        cpuRate(cpuAll, cpuFree);
+        cpu = QString::number(static_cast<double>((cpuAll - oldCpuAll) - (cpuFree - oldCpuFree)) * 100.0 / (cpuAll - oldCpuAll), 'f', decimalsNum)
+                .toDouble(&ok);
+
+        qDebug()<<"-->CPU:"<<cpu<<"%   "<<cpuAll<<oldCpuAll<<cpuFree<<oldCpuFree<<(cpuAll - oldCpuAll) - (cpuFree - oldCpuFree)<<(cpuAll - oldCpuAll);
+
+        oldCpuAll = cpuAll;
+        oldCpuFree = cpuFree;
+
+        QThread::msleep(ms);
+    }
+
+    return static_cast<double>((cpuAll - oldCpuAll - (cpuFree - oldCpuFree) ) * 1.0 / (cpuAll - oldCpuAll));
+}
+
+/*!
+ * \brief SpeedInfo::cpuRate 获取本次 CPU 的状态
+ * \param[out] cpuAll 总 cpu 使用量
+ * \param[out] cpuFree 空闲 cpu 的使用量
+ */
+void SpeedInfo::cpuRate(long &cpuAll, long &cpuFree)
+{
+    cpuAll = cpuFree = 0;
+    bool ok = false;
+    QFile file(PROC_PATH_CPU);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+
+    QTextStream stream(&file);
+    QString line = stream.readLine();
+    if (!line.isNull()) {
+        QStringList list = line.split(QRegExp("\\s{1,}"));
+        for (auto v = list.begin() + 1; v != list.end(); ++v)
+            cpuAll += (*v).toLong(&ok);
+
+        cpuFree = list.at(4).toLong(&ok);
+    }
+
+    file.close();
+}
+
 /*!
  * \brief SpeedInfo::netRate 获取实时网速
  * \param[out] down 下载网速
