@@ -24,12 +24,14 @@ public:
 
 public slots:
     void onUpdateNet();
+    void onUpdateCpu();
+    void onUpdateMemory();
 
 private:
-    DLabel *m_netUpload;
-    DLabel *m_netDown;
-    DLabel *m_cpu;
-    DLabel *m_memory;
+    DLabel *m_labUpload;
+    DLabel *m_labDown;
+    DLabel *m_labCpu;
+    DLabel *m_labMemory;
     DLabel *m_diskRead;
     DLabel *m_diskWrite;
     QTimer *m_timer;
@@ -37,8 +39,8 @@ private:
 
     long m_down;
     long m_upload;
-
-
+    long m_cpuAll;
+    long m_cpuFree;
 };
 
 #endif // SPEEDWIDGET_H

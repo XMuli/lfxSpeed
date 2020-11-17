@@ -13,35 +13,37 @@ DWIDGET_USE_NAMESPACE
 
 SpeedWidget::SpeedWidget(QWidget *parent)
     : QWidget(parent)
-    , m_netUpload(nullptr)
-    , m_netDown(nullptr)
-    , m_cpu(nullptr)
-    , m_memory(nullptr)
+    , m_labUpload(nullptr)
+    , m_labDown(nullptr)
+    , m_labCpu(nullptr)
+    , m_labMemory(nullptr)
     , m_diskRead(nullptr)
     , m_diskWrite(nullptr)
     , m_timer(nullptr)
     , m_info(nullptr)
     , m_down(0)
     , m_upload(0)
+    , m_cpuAll(0)
+    , m_cpuFree(0)
 {
     init();
 }
 
 void SpeedWidget::init()
 {
-    m_netUpload = new DLabel(tr("↑: 0 kb/s"));
-    m_netDown = new DLabel(tr("↓: 0 kb/s"));
-//    m_cpu = new DLabel(tr("CPU: 0 %"));
-//    m_memory = new DLabel(tr("MEM: 0 %"));
+    m_labUpload = new DLabel(tr("↑: 0 kb/s"));
+    m_labDown = new DLabel(tr("↓: 0 kb/s"));
+    m_labCpu = new DLabel(tr("CPU: 0 %"));
+    m_labMemory = new DLabel(tr("MEM: 0 %"));
 //    m_diskRead = new DLabel(tr("↗: 0 kb/s"));
 //    m_diskWrite = new DLabel(tr("↙: 0 kb/s"));
 
     QGridLayout *layout = new QGridLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
-    layout->addWidget(m_netUpload, 0, 0);
-    layout->addWidget(m_netDown, 1, 0);
-//    layout->addWidget(m_cpu, 0, 1);
-//    layout->addWidget(m_memory, 1, 1);
+    layout->addWidget(m_labUpload, 0, 0);
+    layout->addWidget(m_labDown, 1, 0);
+    layout->addWidget(m_labCpu, 0, 1);
+    layout->addWidget(m_labMemory, 1, 1);
 //    layout->addWidget(m_diskRead, 0, 2);
 //    layout->addWidget(m_diskWrite, 1, 2);
 
@@ -49,6 +51,8 @@ void SpeedWidget::init()
     m_timer = new QTimer(this);
     m_timer->setInterval(1000);
     connect(m_timer, &QTimer::timeout, this, &SpeedWidget::onUpdateNet);
+    connect(m_timer, &QTimer::timeout, this, &SpeedWidget::onUpdateCpu);
+    connect(m_timer, &QTimer::timeout, this, &SpeedWidget::onUpdateMemory);
     m_timer->start();
 }
 
@@ -75,10 +79,31 @@ void SpeedWidget::onUpdateNet()
     unit = SpeedInfo::RateByte;
     uploadRate = m_info->autoRateUnits(upload - m_upload, unit);
     QString uploadUnit = m_info->setRateUnitSensitive(unit, SpeedInfo::Default);
+    m_labDown->setText(tr("↓: ") + QString("%1").arg(downRate, 0, 'f', 2, QLatin1Char(' ')) + downUnit);
+    m_labUpload->setText(tr("↑: ") + QString("%1").arg(uploadRate, 0, 'f', 2, QLatin1Char(' ')) + uploadUnit);
 
     m_down = down;
     m_upload = upload;
+}
 
-    m_netDown->setText(tr("↓:") + QString("%1").arg(downRate, 0, 'f', 2, QLatin1Char(' ')) + downUnit);
-    m_netUpload->setText(tr("↑:") + QString("%1").arg(uploadRate, 0, 'f', 2, QLatin1Char(' ')) + uploadUnit);
+void SpeedWidget::onUpdateCpu()
+{
+    long cpuAll = 0;
+    long cpuFree = 0;
+    m_info->cpuRate(cpuAll, cpuFree);
+    m_labCpu->setText(tr("CPU: ") + QString("%1%").arg((((cpuAll - m_cpuAll) - (cpuFree - m_cpuFree)) * 100.0 / (cpuAll - m_cpuAll)), 0, 'f', 2, QLatin1Char(' ')));
+
+    m_cpuAll = cpuAll;
+    m_cpuFree = cpuFree;
+}
+
+void SpeedWidget::onUpdateMemory()
+{
+    long memory = 0;
+    long memoryAll = 0;
+    long swap = 0;
+    long swapAll = 0;
+
+    m_info->memoryRate(memory, memoryAll, swap, swapAll);
+    m_labMemory->setText(tr("MEM: ") + QString("%1%").arg(memory * 100.0 / memoryAll, 0, 'f', 2, QLatin1Char(' ')));
 }

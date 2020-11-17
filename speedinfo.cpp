@@ -21,60 +21,8 @@ SpeedInfo::SpeedInfo(QObject *parent)
 {
 }
 
-double SpeedInfo::cpuRate(int decimalsNum, int ms)
-{
-    bool ok = false;
-    double cpu = 0;
-    long cpuAll = 0;
-    long cpuFree = 0;
-    long oldCpuAll = 0;
-    long oldCpuFree = 0;
-
-    // 实际第一次不准确,第二次开始才是准确的.
-    while (true) {
-        cpuRate(cpuAll, cpuFree);
-        cpu = QString::number(static_cast<double>((cpuAll - oldCpuAll) - (cpuFree - oldCpuFree)) * 100.0 / (cpuAll - oldCpuAll), 'f', decimalsNum)
-                .toDouble(&ok);
-
-        qDebug()<<"-->CPU:"<<cpu<<"%   "<<cpuAll<<oldCpuAll<<cpuFree<<oldCpuFree<<(cpuAll - oldCpuAll) - (cpuFree - oldCpuFree)<<(cpuAll - oldCpuAll);
-
-        oldCpuAll = cpuAll;
-        oldCpuFree = cpuFree;
-
-        QThread::msleep(ms);
-    }
-
-    return static_cast<double>((cpuAll - oldCpuAll - (cpuFree - oldCpuFree) ) * 1.0 / (cpuAll - oldCpuAll));
-}
-
 /*!
- * \brief SpeedInfo::memoryRate 获取内存和交换空间的使用率
- * \param memory 内存的使用率
- * \param swap 交换空间的使用率
- * \param decimalsNum 网速精确度:小数点后的个数
- * \param ms 每隔毫秒数,用来作为网速差的单位计算
- */
-void SpeedInfo::memoryRate(double &memory, double &swap, int decimalsNum, int ms)
-{
-    long lMemory = 0;
-    long lMemoryAll = 0;
-    long lSwap = 0;
-    long lSwapAll = 0;
-    bool ok = false;
-
-    while (true) {
-        memoryRate(lMemory, lMemoryAll, lSwap, lSwapAll);
-        memory = QString::number(static_cast<double>(lMemory * 100.0 / lMemoryAll), 'f', decimalsNum).toDouble(&ok);
-        swap = QString::number(static_cast<double>(lSwap * 100.0 / lSwapAll), 'f', decimalsNum).toDouble(&ok);
-        qDebug()<<QString("----->memory:%1%,   swap:%2%")
-                  .arg(memory, 0, 'f', 2, QLatin1Char('0'))
-                  .arg(swap, 0, 'f', 2, QLatin1Char('0'));
-        QThread::msleep(ms);
-    }
-}
-
-/*!
- * \brief SpeedInfo::cpuRate 获取本次 CPU 的状态
+ * \brief SpeedInfo::cpuRate 获取某一次 CPU 的使用情况
  * \param[out] cpuAll 总 cpu 使用量
  * \param[out] cpuFree 空闲 cpu 的使用量
  */
@@ -100,10 +48,10 @@ void SpeedInfo::cpuRate(long &cpuAll, long &cpuFree)
 }
 
 /*!
- * \brief SpeedInfo::memoryRate 内存 和 交换空间 的使用率
- * \param memory 内存使用占比
+ * \brief SpeedInfo::memoryRate 获取 “内存” 和 “交换空间” 的某一时刻的使用情况
+ * \param memory 内存使用量
  * \param memoryAll 内存总量
- * \param swap 交换空间使用占比
+ * \param swap 交换空间使用量
  * \param swapAll 交换空间总量
  */
 void SpeedInfo::memoryRate(long &memory, long &memoryAll, long &swap, long &swapAll)
@@ -133,9 +81,9 @@ void SpeedInfo::memoryRate(long &memory, long &memoryAll, long &swap, long &swap
 }
 
 /*!
- * \brief SpeedInfo::netRate 获取网络实时速率
- * \param[out] netUpload 网络上传速率
- * \param[out] netUpload 网络下载速率
+ * \brief SpeedInfo::netRate 获取网某一时刻的网络总的数据包量
+ * \param[out] netUpload 网络上传数据量
+ * \param[out] netUpload 网络下载数据量
  * \return 是否获取网络速率成功
  */
 void SpeedInfo::netRate(long &netDown, long &netUpload)

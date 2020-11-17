@@ -8,7 +8,7 @@ SpeedPlugin::SpeedPlugin(QObject *parent)
 
 const QString SpeedPlugin::pluginName() const
 {
-    return "lfxSpeed";
+    return QString("lfxSpeed");
 }
 
 void SpeedPlugin::init(PluginProxyInterface *proxyInter)
@@ -56,7 +56,7 @@ void SpeedPlugin::pluginStateSwitched()
 
 const QString SpeedPlugin::pluginDisplayName() const
 {
-    return tr("lfxSpeed");
+    return QString("lfxSpeed");
 }
 
 //QWidget *SpeedPlugin::itemTipsWidget(const QString &itemKey)

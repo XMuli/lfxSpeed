@@ -31,10 +31,7 @@ public:
     SpeedInfo(QObject *parent = nullptr);
 
     bool systemTime(QString &startup, QString &free);
-    double cpuRate(int decimalsNum = 2, int ms = 1000);
-    void memoryRate(double &memory, double &swap, int decimalsNum = 2, int ms = 1000);
     bool diskRate(long &read, long &write);
-
     void netRate(long &netDown, long &netUpload);
     void cpuRate(long &cpuAll, long &cpuFree);
     void memoryRate(long &memory, long &memoryAll, long &swap, long &swapAll);
