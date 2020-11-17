@@ -59,32 +59,31 @@ const QString SpeedPlugin::pluginDisplayName() const
     return tr("lfxSpeed");
 }
 
+//QWidget *SpeedPlugin::itemTipsWidget(const QString &itemKey)
+//{
+//}
 
-QWidget *SpeedPlugin::itemTipsWidget(const QString &itemKey)
-{
-}
+//QWidget *SpeedPlugin::itemPopupApplet(const QString &itemKey)
+//{
 
-QWidget *SpeedPlugin::itemPopupApplet(const QString &itemKey)
-{
+//}
 
-}
+//void SpeedPlugin::invokedMenuItem(const QString &itemKey, const QString &menuId, const bool checked)
+//{
 
-void SpeedPlugin::invokedMenuItem(const QString &itemKey, const QString &menuId, const bool checked)
-{
+//}
 
-}
+//int SpeedPlugin::itemSortKey(const QString &itemKey)
+//{
 
-int SpeedPlugin::itemSortKey(const QString &itemKey)
-{
+//}
 
-}
+//void SpeedPlugin::displayModeChanged(const Dock::DisplayMode displayMode)
+//{
 
-void SpeedPlugin::displayModeChanged(const Dock::DisplayMode displayMode)
-{
+//}
 
-}
+//void SpeedPlugin::positionChanged(const Dock::Position position)
+//{
 
-void SpeedPlugin::positionChanged(const Dock::Position position)
-{
-
-}
+//}

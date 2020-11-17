@@ -32,11 +32,6 @@ void SpeedWidget::init()
     qDebug()<<"----------SpeedWidget";
 }
 
-QSize SpeedWidget::sizeHint() const
-{
-    qDebug()<<"-------------22-->"<<QWidget::sizeHint();
-}
-
 void SpeedWidget::paintEvent(QPaintEvent *event)
 {
     QPainter pa(this);

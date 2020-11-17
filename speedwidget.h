@@ -11,8 +11,6 @@ public:
     SpeedWidget(QWidget *parent = nullptr);
 
     void init();
-
-    virtual QSize sizeHint() const override;
     virtual void paintEvent(QPaintEvent *event) override;
 
 private:
