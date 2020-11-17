@@ -52,6 +52,32 @@ double SpeedInfo::cpuRate(int decimalsNum, int ms)
 }
 
 /*!
+ * \brief SpeedInfo::memoryRate 获取内存和交换空间的使用率
+ * \param memory 内存的使用率
+ * \param swap 交换空间的使用率
+ * \param decimalsNum 网速精确度:小数点后的个数
+ * \param ms 每隔毫秒数,用来作为网速差的单位计算
+ */
+void SpeedInfo::memoryRate(double &memory, double &swap, int decimalsNum, int ms)
+{
+    long lMemory = 0;
+    long lMemoryAll = 0;
+    long lSwap = 0;
+    long lSwapAll = 0;
+    bool ok = false;
+
+    while (true) {
+        memoryRate(lMemory, lMemoryAll, lSwap, lSwapAll);
+        memory = QString::number(static_cast<double>(lMemory * 100.0 / lMemoryAll), 'f', decimalsNum).toDouble(&ok);
+        swap = QString::number(static_cast<double>(lSwap * 100.0 / lSwapAll), 'f', decimalsNum).toDouble(&ok);
+        qDebug()<<QString("----->memory:%1 %,   swap:%2 %")
+                  .arg(memory, 4, 'f', 2, QLatin1Char('0'))
+                  .arg(swap, 4, 'f', 2, QLatin1Char('0'));
+        QThread::msleep(ms);
+    }
+}
+
+/*!
  * \brief SpeedInfo::cpuRate 获取本次 CPU 的状态
  * \param[out] cpuAll 总 cpu 使用量
  * \param[out] cpuFree 空闲 cpu 的使用量
@@ -73,6 +99,39 @@ void SpeedInfo::cpuRate(long &cpuAll, long &cpuFree)
 
         cpuFree = list.at(4).toLong(&ok);
     }
+
+    file.close();
+}
+
+/*!
+ * \brief SpeedInfo::memoryRate 内存 和 交换空间 的使用率
+ * \param memory 内存使用占比
+ * \param memoryAll 内存总量
+ * \param swap 交换空间使用占比
+ * \param swapAll 交换空间总量
+ */
+void SpeedInfo::memoryRate(long &memory, long &memoryAll, long &swap, long &swapAll)
+{
+    memory = memoryAll = 0;
+    swap = swapAll = 0;
+    bool ok = false;
+    QFile file(PROC_PATH_MEM);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+
+    QTextStream stream(&file);
+    long buff[16] = {0};
+    for (int i = 0; i <= 15; ++i) {
+        QString line = stream.readLine();
+        QStringList list = line.split(QRegExp("\\s{1,}"));
+        buff[i] = list.at(1).toLong(&ok);
+
+    }
+
+    memoryAll = buff[0];
+    memory = buff[0] - buff[2];
+    swapAll = buff[14];
+    swap = buff[14] - buff[15];
 
     file.close();
 }
@@ -136,6 +195,7 @@ bool SpeedInfo::netRate(long &netDown, long &netUpload)
     line  = stream.readLine();
     line  = stream.readLine();
     while (!line.isNull()) {
+//        qDebug()<<"----->"<<line<<line.count();
         QStringList list = line.split(QRegExp("\\s{1,}"));   // 匹配任意 大于等于1个的 空白字符
 
         if (!list.isEmpty()) {
