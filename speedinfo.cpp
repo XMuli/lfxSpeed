@@ -8,6 +8,7 @@
 #include <QThread>
 #include <QtMath>
 #include <QTimer>
+#include <QDateTime>
 
 #define PROC_PATH_UPTIME    "/proc/uptime"      // "系统启动" 和 "系统空闲" 的时间
 #define PROC_PATH_CPU       "/proc/stat"        // "CPU" 使用率 的状态
@@ -18,11 +19,6 @@
 SpeedInfo::SpeedInfo(QObject *parent)
     :QObject(parent)
 {
-}
-
-void SpeedInfo::init()
-{
-    m_timer = new QTimer(this);
 }
 
 double SpeedInfo::cpuRate(int decimalsNum, int ms)
@@ -70,9 +66,9 @@ void SpeedInfo::memoryRate(double &memory, double &swap, int decimalsNum, int ms
         memoryRate(lMemory, lMemoryAll, lSwap, lSwapAll);
         memory = QString::number(static_cast<double>(lMemory * 100.0 / lMemoryAll), 'f', decimalsNum).toDouble(&ok);
         swap = QString::number(static_cast<double>(lSwap * 100.0 / lSwapAll), 'f', decimalsNum).toDouble(&ok);
-        qDebug()<<QString("----->memory:%1 %,   swap:%2 %")
-                  .arg(memory, 4, 'f', 2, QLatin1Char('0'))
-                  .arg(swap, 4, 'f', 2, QLatin1Char('0'));
+        qDebug()<<QString("----->memory:%1%,   swap:%2%")
+                  .arg(memory, 0, 'f', 2, QLatin1Char('0'))
+                  .arg(swap, 0, 'f', 2, QLatin1Char('0'));
         QThread::msleep(ms);
     }
 }
@@ -137,74 +133,35 @@ void SpeedInfo::memoryRate(long &memory, long &memoryAll, long &swap, long &swap
 }
 
 /*!
- * \brief SpeedInfo::netRate 获取实时网速
- * \param[out] down 下载网速
- * \param[out] upload 上传网速
- * \param[out] downUnit 下载网速的单位
- * \param[out] uploadUnit 下载网速的单位
- * \param decimalsNum 网速精确度:小数点后的个数
- * \param ms 每隔毫秒数,用来作为网速差的单位计算
- * \param sensitive 默认输出速率单位的大小写模式
- * \return 获取是否成功
- */
-void SpeedInfo::netRate(double &down, double &upload, QString &downUnit, QString &uploadUnit, int decimalsNum, int ms, Sensitive sensitive)
-{
-    long oldDown = 0;
-    long oldUpload = 0;
-    long tempDown = static_cast<double>(down);
-    long tempUpload = static_cast<double>(upload);
-
-    netRate(oldDown, oldUpload);
-    while (true) {
-        netRate(tempDown, tempUpload);
-        RateUnit unit = RateUnit::RateByte;
-        bool ok = false;
-        down = QString::number(autoRateUnits(tempDown - oldDown, unit), 'f', decimalsNum).toDouble(&ok);
-        downUnit = setRateUnitSensitive(unit, sensitive);
-        oldDown = tempDown;
-
-        unit = RateUnit::RateByte;
-        upload = QString::number(autoRateUnits(tempUpload - oldUpload, unit), 'f', decimalsNum).toDouble(&ok);
-        uploadUnit = setRateUnitSensitive(unit, sensitive);
-        oldUpload = tempUpload;
-
-        qDebug()<<"[up:]"<<upload<<uploadUnit<<"   [Down:]"<<down<<downUnit<<"  当前总的数据包 Down:"<<tempDown<<"   Up:"<<tempUpload;//<<"     ===>旧的数据:"<<oldDown<<"   "<<oldUpload;
-        QThread::msleep(ms);
-    }
-}
-
-/*!
  * \brief SpeedInfo::netRate 获取网络实时速率
  * \param[out] netUpload 网络上传速率
  * \param[out] netUpload 网络下载速率
  * \return 是否获取网络速率成功
  */
-bool SpeedInfo::netRate(long &netDown, long &netUpload)
+void SpeedInfo::netRate(long &netDown, long &netUpload)
 {
-    if (netDown != 0 || netUpload != 0)
-        netDown = netUpload = 0;
-
     QFile file(PROC_PATH_NET);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))  // 在读取时，把行尾结束符修改为 '\n'； 在写入时，把行尾结束符修改为本地系统换行风格，比如Windows文本换行是 "\r\n"
-        return false;
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {  // 在读取时，把行尾结束符修改为 '\n'； 在写入时，把行尾结束符修改为本地系统换行风格，比如Windows文本换行是 "\r\n"
+        qDebug()<<"\"/proc/net/dev\" don't open!";
+        return;
+    }
 
-    long upload = 0;
     long down = 0;
+    long upload = 0;
     QTextStream stream(&file);
     QString line = stream.readLine();
     line  = stream.readLine();
     line  = stream.readLine();
     while (!line.isNull()) {
-//        qDebug()<<"----->"<<line<<line.count();
         QStringList list = line.split(QRegExp("\\s{1,}"));   // 匹配任意 大于等于1个的 空白字符
 
         if (!list.isEmpty()) {
-            upload = list.at(2).toLong();
-            down = list.at(10).toLong();
+            down = list.at(2).toLong();
+            upload = list.at(10).toLong();
         }
 
-        netDown += upload;
-        netUpload += down;
+        netDown += down;
+        netUpload += upload;
         line  = stream.readLine();
     }
 
