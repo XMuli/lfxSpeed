@@ -37,7 +37,6 @@ public:
 private:
     PluginProxyInterface *m_proxyInter;
     SpeedWidget *m_speedWidget;
-public:
 };
 
 #endif // SPEEDPLUGIN_H
