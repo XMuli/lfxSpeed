@@ -20,6 +20,7 @@ public:
     SpeedWidget(QWidget *parent = nullptr);
 
     void init();
+//    virtual QSize sizeHint() const override;
 //    virtual void paintEvent(QPaintEvent *event) override;
 
 public slots:
@@ -41,6 +42,7 @@ private:
     long m_upload;
     long m_cpuAll;
     long m_cpuFree;
+
 };
 
 #endif // SPEEDWIDGET_H

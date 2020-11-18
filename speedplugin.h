@@ -27,13 +27,6 @@ public:
 
     virtual const QString pluginDisplayName() const override;
 
-//    virtual QWidget *itemTipsWidget(const QString &itemKey) override;
-//    virtual QWidget *itemPopupApplet(const QString &itemKey) override;
-//    virtual void invokedMenuItem(const QString &itemKey, const QString &menuId, const bool checked) override;
-//    virtual int itemSortKey(const QString &itemKey) override;
-//    virtual void displayModeChanged(const Dock::DisplayMode displayMode) override;
-//    virtual void positionChanged(const Dock::Position position) override;
-
 private:
     PluginProxyInterface *m_proxyInter;
     SpeedWidget *m_speedWidget;

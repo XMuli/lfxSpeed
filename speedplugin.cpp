@@ -45,45 +45,16 @@ void SpeedPlugin::pluginStateSwitched()
 {
     // 将旧的 "禁用状态" 数值取反后,保存到 key-val 中
     const bool disableState = !pluginIsDisable();
-    m_proxyInter->getValue(this, "disabled", disableState);
+    m_proxyInter->saveValue(this, "disabled", disableState);
 
     // 根据新的禁用状态值,处理主控的加载与卸载
     if (disableState)
-        m_proxyInter->itemAdded(this, pluginName());
-    else
         m_proxyInter->itemRemoved(this, pluginName());
+    else
+        m_proxyInter->itemAdded(this, pluginName());
 }
 
 const QString SpeedPlugin::pluginDisplayName() const
 {
     return QString("lfxSpeed");
 }
-
-//QWidget *SpeedPlugin::itemTipsWidget(const QString &itemKey)
-//{
-//}
-
-//QWidget *SpeedPlugin::itemPopupApplet(const QString &itemKey)
-//{
-
-//}
-
-//void SpeedPlugin::invokedMenuItem(const QString &itemKey, const QString &menuId, const bool checked)
-//{
-
-//}
-
-//int SpeedPlugin::itemSortKey(const QString &itemKey)
-//{
-
-//}
-
-//void SpeedPlugin::displayModeChanged(const Dock::DisplayMode displayMode)
-//{
-
-//}
-
-//void SpeedPlugin::positionChanged(const Dock::Position position)
-//{
-
-//}

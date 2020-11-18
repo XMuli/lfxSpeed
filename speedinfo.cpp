@@ -128,17 +128,17 @@ QString SpeedInfo::setRateUnitSensitive(RateUnit unit, Sensitive sensitive)
     case Sensitive::Default: {
         switch (unit) {
         case RateUnit::RateBit:
-            return QString("Bit");
+            return QString("Bit/s");
         case RateUnit::RateByte:
-            return QString("Byte");
+            return QString("Byte/s");
         case RateUnit::RateKb:
-            return QString("Kb");
+            return QString("Kb/s");
         case RateUnit::RateMb:
-            return QString("Mb");
+            return QString("Mb/s");
         case RateUnit::RateGb:
-            return QString("Gb");
+            return QString("Gb/s");
         case RateUnit::RateTb:
-            return QString("Tb");
+            return QString("Tb/s");
         default:
             qDebug()<<QString("Sensitive::Default,  RateUnit is RateUnknow.");
             return QString("");
@@ -147,17 +147,17 @@ QString SpeedInfo::setRateUnitSensitive(RateUnit unit, Sensitive sensitive)
     case Sensitive::Upper: {
         switch (unit) {
         case RateUnit::RateBit:
-            return QString("Bit");
+            return QString("BIT/S");
         case RateUnit::RateByte:
-            return QString("BYTE");
+            return QString("BYTE/S");
         case RateUnit::RateKb:
-            return QString("KB");
+            return QString("KB/S");
         case RateUnit::RateMb:
-            return QString("MB");
+            return QString("MB/S");
         case RateUnit::RateGb:
-            return QString("GB");
+            return QString("GB/S");
         case RateUnit::RateTb:
-            return QString("TB");
+            return QString("TB/S");
         default:
             qDebug()<<QString("Sensitive::Upper,  RateUnit is RateUnknow.");
             return QString("");
@@ -166,17 +166,17 @@ QString SpeedInfo::setRateUnitSensitive(RateUnit unit, Sensitive sensitive)
     case Sensitive::Lower: {
         switch (unit) {
         case RateUnit::RateBit:
-            return QString("bit");
+            return QString("bit/s");
         case RateUnit::RateByte:
-            return QString("byte");
+            return QString("byte/s");
         case RateUnit::RateKb:
-            return QString("kb");
+            return QString("kb/s");
         case RateUnit::RateMb:
-            return QString("mb");
+            return QString("mb/s");
         case RateUnit::RateGb:
-            return QString("gb");
+            return QString("gb/s");
         case RateUnit::RateTb:
-            return QString("tb");
+            return QString("tb/s");
         default:
             qDebug()<<QString("Sensitive::Lower,  RateUnit is RateUnknow.");
             return QString("");
