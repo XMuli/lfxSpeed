@@ -33,6 +33,11 @@ private:
     DLabel *m_labDown;
     DLabel *m_labCpu;
     DLabel *m_labMemory;
+
+    DLabel *m_numUpload;
+    DLabel *m_numDown;
+    DLabel *m_numCpu;
+    DLabel *m_numMemory;
     DLabel *m_diskRead;
     DLabel *m_diskWrite;
     QTimer *m_timer;

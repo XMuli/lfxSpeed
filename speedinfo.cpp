@@ -128,9 +128,9 @@ QString SpeedInfo::setRateUnitSensitive(RateUnit unit, Sensitive sensitive)
     case Sensitive::Default: {
         switch (unit) {
         case RateUnit::RateBit:
-            return QString("Bit/s");
+            return QString("b/s");
         case RateUnit::RateByte:
-            return QString("Byte/s");
+            return QString("B/s");
         case RateUnit::RateKb:
             return QString("Kb/s");
         case RateUnit::RateMb:

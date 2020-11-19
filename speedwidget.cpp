@@ -17,6 +17,10 @@ SpeedWidget::SpeedWidget(QWidget *parent)
     , m_labDown(nullptr)
     , m_labCpu(nullptr)
     , m_labMemory(nullptr)
+    , m_numUpload(nullptr)
+    , m_numDown(nullptr)
+    , m_numCpu(nullptr)
+    , m_numMemory(nullptr)
     , m_diskRead(nullptr)
     , m_diskWrite(nullptr)
     , m_timer(nullptr)
@@ -43,23 +47,36 @@ SpeedWidget::SpeedWidget(QWidget *parent)
  */
 void SpeedWidget::init()
 {
-    m_labUpload = new DLabel(tr("0 kb/s"));
-    m_labDown = new DLabel(tr("0 kb/s"));
-    m_labCpu = new DLabel(tr("0 %"));
-    m_labMemory = new DLabel(tr("0 %"));
+    m_numUpload = new DLabel(tr("0 Kb/s"));
+    m_numUpload->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    m_numDown = new DLabel(tr("0 Kb/s"));
+    m_numDown->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    m_numCpu = new DLabel(tr("0 %"));
+    m_numCpu->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    m_numMemory = new DLabel(tr("0 %"));
+    m_numMemory->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
 //    m_diskRead = new DLabel(tr("↗: 0 kb/s"));
 //    m_diskWrite = new DLabel(tr("↙: 0 kb/s"));
 
     QGridLayout *layout = new QGridLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
-    layout->addWidget(new DLabel(tr("↑: ")), 0, 0);
-    layout->addWidget(m_labUpload, 0, 1);
-    layout->addWidget(new DLabel(tr("↓: ")), 1, 0);
-    layout->addWidget(m_labDown, 1, 1);
-    layout->addWidget(new DLabel(tr("CPU: ")), 0, 2);
-    layout->addWidget(m_labCpu, 0, 3);
-    layout->addWidget(new DLabel(tr("MEM: ")), 1, 2);
-    layout->addWidget(m_labMemory, 1, 3);
+
+    m_labUpload = new DLabel(tr("↑: "));
+    m_labUpload->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    m_labDown = new DLabel(tr("↓: "));
+    m_labDown->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    m_labCpu = new DLabel(tr(" CPU: "));
+    m_labCpu->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    m_labMemory = new DLabel(tr(" MEM: "));
+    m_labMemory->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    layout->addWidget(m_labUpload, 0, 0);
+    layout->addWidget(m_numUpload, 0, 1);
+    layout->addWidget(m_labDown, 1, 0);
+    layout->addWidget(m_numDown, 1, 1);
+    layout->addWidget(m_labCpu, 0, 2);
+    layout->addWidget(m_numCpu, 0, 3);
+    layout->addWidget(m_labMemory, 1, 2);
+    layout->addWidget(m_numMemory, 1, 3);
 //    layout->addWidget(m_diskRead, 0, 2);
 //    layout->addWidget(m_diskWrite, 1, 2);
 
@@ -95,8 +112,8 @@ void SpeedWidget::onUpdateNet()
     unit = SpeedInfo::RateByte;
     uploadRate = m_info->autoRateUnits(upload - m_upload, unit);
     QString uploadUnit = m_info->setRateUnitSensitive(unit, SpeedInfo::Default);
-    m_labDown->setText(QString("%1").arg(downRate, 0, 'f', 2, QLatin1Char(' ')) + downUnit);
-    m_labUpload->setText(QString("%1").arg(uploadRate, 0, 'f', 2, QLatin1Char(' ')) + uploadUnit);
+    m_numDown->setText(QString("%1").arg(downRate, 0, 'f', 2, QLatin1Char(' ')) + downUnit);
+    m_numUpload->setText(QString("%1").arg(uploadRate, 0, 'f', 2, QLatin1Char(' ')) + uploadUnit);
 
     m_down = down;
     m_upload = upload;
@@ -107,7 +124,7 @@ void SpeedWidget::onUpdateCpu()
     long cpuAll = 0;
     long cpuFree = 0;
     m_info->cpuRate(cpuAll, cpuFree);
-    m_labCpu->setText(QString("%1%").arg((((cpuAll - m_cpuAll) - (cpuFree - m_cpuFree)) * 100.0 / (cpuAll - m_cpuAll)), 0, 'f', 2, QLatin1Char(' ')));
+    m_numCpu->setText(QString("%1%").arg((((cpuAll - m_cpuAll) - (cpuFree - m_cpuFree)) * 100.0 / (cpuAll - m_cpuAll)), 0, 'f', 2, QLatin1Char(' ')));
 
     m_cpuAll = cpuAll;
     m_cpuFree = cpuFree;
@@ -121,5 +138,5 @@ void SpeedWidget::onUpdateMemory()
     long swapAll = 0;
 
     m_info->memoryRate(memory, memoryAll, swap, swapAll);
-    m_labMemory->setText(QString("%1%").arg(memory * 100.0 / memoryAll, 0, 'f', 2, QLatin1Char(' ')));
+    m_numMemory->setText(QString("%1%").arg(memory * 100.0 / memoryAll, 0, 'f', 2, QLatin1Char(' ')));
 }

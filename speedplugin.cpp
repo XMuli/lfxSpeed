@@ -1,5 +1,8 @@
 #include "speedplugin.h"
 
+#include <DMessageBox>
+DWIDGET_USE_NAMESPACE
+
 SpeedPlugin::SpeedPlugin(QObject *parent)
     :QObject(parent)
 {
@@ -8,7 +11,9 @@ SpeedPlugin::SpeedPlugin(QObject *parent)
 
 const QString SpeedPlugin::pluginName() const
 {
-    return QString("lfxSpeed");
+//    return QString("lfxSpeed");
+
+    return "datetime";  // 假装我也叫这个，否则会被压缩，在 1.2.3 版本中才被修改
 }
 
 void SpeedPlugin::init(PluginProxyInterface *proxyInter)
@@ -57,4 +62,36 @@ void SpeedPlugin::pluginStateSwitched()
 const QString SpeedPlugin::pluginDisplayName() const
 {
     return QString("lfxSpeed");
+}
+
+const QString SpeedPlugin::itemContextMenu(const QString &itemKey)
+{
+    Q_UNUSED(itemKey);
+
+    QList<QVariant> items;
+    items.reserve(1);
+
+    QMap<QString, QVariant> about;
+    about["itemId"] = "about";
+    about["itemText"] = "关于";
+    about["isActive"] = true;
+    items.push_back(about);
+
+    QMap<QString, QVariant> menu;
+    menu["items"] = items;
+    menu["checkableMenu"] = false;
+    menu["singleCheck"] = false;
+
+    // 返回 JSON 格式的菜单数据
+    return QJsonDocument::fromVariant(menu).toJson();
+}
+
+void SpeedPlugin::invokedMenuItem(const QString &itemKey, const QString &menuId, const bool checked)
+{
+    Q_UNUSED(itemKey);
+
+    if (menuId == "about") {
+        DMessageBox::about(nullptr, tr("lfxSpeed"), tr("一款轻便、快速的网速插件，欢迎反馈和贡献。\n https://github.com/xmuli/lfxSpeed"));
+
+    }
 }

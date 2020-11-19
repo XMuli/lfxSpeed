@@ -3,8 +3,14 @@
 
 #include <QObject>
 #include <pluginsiteminterface.h>
+#include <dtkwidget_global.h>
 
 #include "speedwidget.h"
+
+class QTimer;
+class SpeedInfo;
+
+DWIDGET_USE_NAMESPACE
 
 class SpeedPlugin : public QObject, public PluginsItemInterface
 {
@@ -26,6 +32,8 @@ public:
     virtual void pluginStateSwitched() override;
 
     virtual const QString pluginDisplayName() const override;
+    virtual const QString itemContextMenu(const QString &itemKey) override;
+    virtual void invokedMenuItem(const QString &itemKey, const QString &menuId, const bool checked) override;
 
 private:
     PluginProxyInterface *m_proxyInter;
