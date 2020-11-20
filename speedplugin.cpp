@@ -15,9 +15,9 @@
  * copies or substantial portions of the Software.
  * */
 
+#include "aboutdialog.h"
 #include "speedplugin.h"
 
-#include <DMessageBox>
 DWIDGET_USE_NAMESPACE
 
 SpeedPlugin::SpeedPlugin(QObject *parent)
@@ -105,10 +105,11 @@ const QString SpeedPlugin::itemContextMenu(const QString &itemKey)
 
 void SpeedPlugin::invokedMenuItem(const QString &itemKey, const QString &menuId, const bool checked)
 {
-    Q_UNUSED(itemKey);
+    Q_UNUSED(itemKey)
+    Q_UNUSED(checked)
 
     if (menuId == "about") {
-        DMessageBox::about(nullptr, tr("lfxSpeed"), tr("一款轻便、快速的网速插件，欢迎反馈和贡献。\n https://github.com/xmuli/lfxSpeed"));
-
+        AboutDialog * aa = new AboutDialog();
+        aa->show();
     }
 }
