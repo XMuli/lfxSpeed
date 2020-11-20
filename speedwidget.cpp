@@ -63,7 +63,7 @@ SpeedWidget::SpeedWidget(QWidget *parent)
  * \endhtmlonly
  */
 void SpeedWidget::init()
-{
+{   
     m_numUpload = new DLabel(tr("0 Kb/s"));
     m_numUpload->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     m_numDown = new DLabel(tr("0 Kb/s"));
@@ -98,6 +98,9 @@ void SpeedWidget::init()
 //    layout->addWidget(m_diskWrite, 1, 2);
 
     m_info = new SpeedInfo(this);
+    m_info->netRate(m_down, m_upload);
+    m_info->cpuRate(m_cpuAll, m_cpuFree);
+
     m_timer = new QTimer(this);
     m_timer->setInterval(1000);
     connect(m_timer, &QTimer::timeout, this, &SpeedWidget::onUpdateNet);
