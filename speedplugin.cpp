@@ -17,13 +17,21 @@
 
 #include "aboutdialog.h"
 #include "speedplugin.h"
+#include "speedwidget.h"
+#include "winmain.h"
+
+#include <QApplication>
+#include <QDesktopWidget>
 
 DWIDGET_USE_NAMESPACE
 
 SpeedPlugin::SpeedPlugin(QObject *parent)
-    :QObject(parent)
+    : QObject(parent)
+    , m_WinMain(nullptr)
+    , m_speedWidget(nullptr)
+    , m_proxyInter(nullptr)
 {
-    qDebug()<<"============lfxSpeed============";
+    // 此处写 connect , 如何找到各自对象的指针呢? 写很多对的输出控件对象的函数接口?
 }
 
 const QString SpeedPlugin::pluginName() const
@@ -86,7 +94,13 @@ const QString SpeedPlugin::itemContextMenu(const QString &itemKey)
     Q_UNUSED(itemKey);
 
     QList<QVariant> items;
-    items.reserve(1);
+    items.reserve(2);
+
+    QMap<QString, QVariant> setting;
+    setting["itemId"] = "setting";
+    setting["itemText"] = "配置";
+    setting["isActive"] = true;
+    items.push_back(setting);
 
     QMap<QString, QVariant> about;
     about["itemId"] = "about";
@@ -108,8 +122,14 @@ void SpeedPlugin::invokedMenuItem(const QString &itemKey, const QString &menuId,
     Q_UNUSED(itemKey)
     Q_UNUSED(checked)
 
-    if (menuId == "about") {
-        AboutDialog * aa = new AboutDialog();
-        aa->show();
+    qApp->setAttribute(Qt::AA_UseHighDpiPixmaps);
+
+    if (menuId == "setting") {
+        m_WinMain = new WinMain();
+        m_WinMain->move((QApplication::desktop()->width() - m_WinMain->width())/2,(QApplication::desktop()->height() - m_WinMain->height())/2);
+        m_WinMain->show();
+    } else if (menuId == "about") {
+        AboutDialog * about = new AboutDialog();
+        about->show();
     }
 }

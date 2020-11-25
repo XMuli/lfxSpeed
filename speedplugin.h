@@ -22,10 +22,10 @@
 #include <pluginsiteminterface.h>
 #include <dtkwidget_global.h>
 
-#include "speedwidget.h"
-
 class QTimer;
 class SpeedInfo;
+class WinMain;
+class SpeedWidget;
 
 DWIDGET_USE_NAMESPACE
 
@@ -55,6 +55,7 @@ public:
 private:
     PluginProxyInterface *m_proxyInter;
     SpeedWidget *m_speedWidget;
+    WinMain *m_WinMain;
 };
 
 #endif // SPEEDPLUGIN_H

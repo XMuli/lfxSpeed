@@ -78,13 +78,13 @@ void SpeedWidget::init()
     QGridLayout *layout = new QGridLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
 
-    m_labUpload = new DLabel(tr("↑: "));
+    m_labUpload = new DLabel(tr("↑:"));
     m_labUpload->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    m_labDown = new DLabel(tr("↓: "));
+    m_labDown = new DLabel(tr("↓:"));
     m_labDown->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    m_labCpu = new DLabel(tr(" CPU: "));
+    m_labCpu = new DLabel(tr(" CPU:"));
     m_labCpu->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    m_labMemory = new DLabel(tr(" MEM: "));
+    m_labMemory = new DLabel(tr(" MEM:"));
     m_labMemory->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     layout->addWidget(m_labUpload, 0, 0);
     layout->addWidget(m_numUpload, 0, 1);
@@ -127,10 +127,10 @@ void SpeedWidget::onUpdateNet()
     SpeedInfo::RateUnit unit = SpeedInfo::RateByte;
 
     m_info->netRate(down, upload);
-    downRate = m_info->autoRateUnits(down - m_down, unit);
+    downRate = m_info->autoRateUnits((down - m_down) / (m_timer->interval() / 1000), unit);
     QString downUnit = m_info->setRateUnitSensitive(unit, SpeedInfo::Default);
     unit = SpeedInfo::RateByte;
-    uploadRate = m_info->autoRateUnits(upload - m_upload, unit);
+    uploadRate = m_info->autoRateUnits((upload - m_upload) / (m_timer->interval() / 1000), unit);
     QString uploadUnit = m_info->setRateUnitSensitive(unit, SpeedInfo::Default);
     m_numDown->setText(QString("%1").arg(downRate, 0, 'f', 2, QLatin1Char(' ')) + downUnit);
     m_numUpload->setText(QString("%1").arg(uploadRate, 0, 'f', 2, QLatin1Char(' ')) + uploadUnit);
