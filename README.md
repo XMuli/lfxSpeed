@@ -88,5 +88,5 @@ dde-dock
 
 ### 许可协议
 
-![](https://img.shields.io/github/license/xmuli/lfxSpeed)  [MIT](LICENSE) © Richard Littauer
+![](https://img.shields.io/github/license/xmuli/lfxSpeed)  [MIT](LICENSE) © xmuli <偕臧>
 
