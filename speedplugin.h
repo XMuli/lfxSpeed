@@ -21,6 +21,7 @@
 #include <QObject>
 #include <pluginsiteminterface.h>
 #include <dtkwidget_global.h>
+#include "dlabel.h"
 
 class QTimer;
 class SpeedInfo;
@@ -52,18 +53,22 @@ public:
     virtual const QString pluginDisplayName() const override;
     virtual const QString itemContextMenu(const QString &itemKey) override;
     virtual void invokedMenuItem(const QString &itemKey, const QString &menuId, const bool checked) override;
+    virtual QWidget *itemTipsWidget(const QString &itemKey) override;
 
 signals:
     void labUpload(const QString &labUpload);
 
 public slots:
-    void onTest(const QString &labUpload);
+    void onUpdateTip();
 
 private:
     PluginProxyInterface *m_proxyInter;
     SpeedWidget *m_speedWidget;
     WinMain *m_winMain;
     SettingModel *m_model;
+
+    DLabel m_labTip;
+    QTimer m_timer;
 };
 
 #endif // SPEEDPLUGIN_H

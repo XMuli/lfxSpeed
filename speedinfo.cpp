@@ -279,8 +279,8 @@ void SpeedInfo::uptime(double &run, double &idle)
 
 QString SpeedInfo::autoTimeUnits(double time)
 {
-    int ms = (time - qFloor(time)) * 1000;
-    QString strTime = QString(tr("已系统已运行: ")) + QDateTime::fromSecsSinceEpoch(time / 1000).toString("dd 天, hh:MM:ss:") + QString::number(ms);
+    QString strTime = QString(tr("系统已运行: ")) + QDateTime::fromSecsSinceEpoch(time, Qt::UTC).toString("dd 天, hh:MM:ss:");
+    qDebug()<<"-------------------------_>"<<time<<strTime;
     return strTime;
 }
 

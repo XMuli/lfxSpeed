@@ -23,6 +23,7 @@
 
 #include <QApplication>
 #include <QDesktopWidget>
+#include <QTimer>
 
 DWIDGET_USE_NAMESPACE
 
@@ -32,6 +33,9 @@ SpeedPlugin::SpeedPlugin(QObject *parent)
     , m_speedWidget(nullptr)
     , m_proxyInter(nullptr)
 {
+    m_timer.setInterval(1000);
+    connect(&m_timer, &QTimer::timeout, this, &SpeedPlugin::onUpdateTip);
+    m_timer.start();
 }
 
 const QString SpeedPlugin::pluginName() const
@@ -128,7 +132,6 @@ void SpeedPlugin::invokedMenuItem(const QString &itemKey, const QString &menuId,
     qApp->setAttribute(Qt::AA_UseHighDpiPixmaps);
 
     if (menuId == "setting") {
-//        m_winMain = new WinMain();
         m_winMain->move((QApplication::desktop()->width() - m_winMain->width())/2,(QApplication::desktop()->height() - m_winMain->height())/2);
         m_winMain->show();
     } else if (menuId == "about") {
@@ -137,7 +140,13 @@ void SpeedPlugin::invokedMenuItem(const QString &itemKey, const QString &menuId,
     }
 }
 
-void SpeedPlugin::onTest(const QString &labUpload)
+QWidget *SpeedPlugin::itemTipsWidget(const QString &itemKey)
 {
-    qDebug()<<"--------------------------------------------__>onTest()"<<labUpload;
+    Q_UNUSED(itemKey)
+    return &m_labTip;
+}
+
+void SpeedPlugin::onUpdateTip()
+{
+    m_labTip.setText(m_speedWidget->m_runTime);
 }

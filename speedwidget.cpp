@@ -113,6 +113,7 @@ void SpeedWidget::init()
     connect(m_timer, &QTimer::timeout, this, &SpeedWidget::onUpdateNet);
     connect(m_timer, &QTimer::timeout, this, &SpeedWidget::onUpdateCpu);
     connect(m_timer, &QTimer::timeout, this, &SpeedWidget::onUpdateMemory);
+    connect(m_timer, &QTimer::timeout, this, &SpeedWidget::onRunTime);
     m_timer->start();
 }
 
@@ -192,4 +193,14 @@ void SpeedWidget::onUpAndDown(Qt::CheckState check)
 {
 //    if (check == Qt::Checked)
     // TODO: 上传核下载互相换位置
+}
+
+QString SpeedWidget::onRunTime()
+{
+    double run = 0;
+    double idel = 0;
+    m_info->uptime(run, idel);
+    m_runTime = m_info->autoTimeUnits(run);
+
+    return m_runTime;
 }

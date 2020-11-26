@@ -40,6 +40,7 @@ public:
     void init();
 //    virtual QSize sizeHint() const override;
 //    virtual void paintEvent(QPaintEvent *event) override;
+    QString m_runTime;
 
 public slots:
     void onUpdateNet();
@@ -50,6 +51,7 @@ public slots:
     void onSetLabCpu(const QString cpu);
     void onSetLabMemory(const QString memory);
     void onUpAndDown(Qt::CheckState check);
+    QString onRunTime();
 
 private:
     DLabel *m_labUpload;
