@@ -88,7 +88,7 @@ void WinMain::init()
     gridShowText->addItem(vSpacer2, 5, 0);
 
     QGridLayout* gridCheck = new QGridLayout();
-    m_checkUpAndDown->setCheckState(Qt::Checked);
+    m_checkUpAndDown->setCheckState(Qt::Unchecked);
     m_checkUpAndDown->setText(tr("交换上传和下载的位置"));
     gridCheck->addWidget(m_checkUpAndDown, 2, 0);
     m_checkMouseTips->setCheckState(Qt::Checked);
