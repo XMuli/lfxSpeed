@@ -19,6 +19,7 @@
 #include "speedplugin.h"
 #include "speedwidget.h"
 #include "winmain.h"
+#include "settingmodel.h"
 
 #include <QApplication>
 #include <QDesktopWidget>
@@ -27,11 +28,10 @@ DWIDGET_USE_NAMESPACE
 
 SpeedPlugin::SpeedPlugin(QObject *parent)
     : QObject(parent)
-    , m_WinMain(nullptr)
+    , m_winMain(nullptr)
     , m_speedWidget(nullptr)
     , m_proxyInter(nullptr)
 {
-    // 此处写 connect , 如何找到各自对象的指针呢? 写很多对的输出控件对象的函数接口?
 }
 
 const QString SpeedPlugin::pluginName() const
@@ -43,8 +43,11 @@ const QString SpeedPlugin::pluginName() const
 
 void SpeedPlugin::init(PluginProxyInterface *proxyInter)
 {
+    m_model = new SettingModel();
+
     m_proxyInter = proxyInter;
-    m_speedWidget = new SpeedWidget();
+    m_speedWidget = new SpeedWidget(m_model);
+    m_winMain = new WinMain(m_model);
 
     // 如果插件没有被禁用, 则在初始化插件时才添加主控件到面板上
     if (!pluginIsDisable())
@@ -125,11 +128,16 @@ void SpeedPlugin::invokedMenuItem(const QString &itemKey, const QString &menuId,
     qApp->setAttribute(Qt::AA_UseHighDpiPixmaps);
 
     if (menuId == "setting") {
-        m_WinMain = new WinMain();
-        m_WinMain->move((QApplication::desktop()->width() - m_WinMain->width())/2,(QApplication::desktop()->height() - m_WinMain->height())/2);
-        m_WinMain->show();
+//        m_winMain = new WinMain();
+        m_winMain->move((QApplication::desktop()->width() - m_winMain->width())/2,(QApplication::desktop()->height() - m_winMain->height())/2);
+        m_winMain->show();
     } else if (menuId == "about") {
         AboutDialog * about = new AboutDialog();
         about->show();
     }
+}
+
+void SpeedPlugin::onTest(const QString &labUpload)
+{
+    qDebug()<<"--------------------------------------------__>onTest()"<<labUpload;
 }

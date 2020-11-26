@@ -19,7 +19,6 @@
 #define SPEEDWIDGET_H
 
 #include <QWidget>
-
 #include <dtkwidget_global.h>
 
 DWIDGET_BEGIN_NAMESPACE
@@ -28,13 +27,15 @@ DWIDGET_END_NAMESPACE
 
 class QTimer;
 class SpeedInfo;
+class SettingModel;
 
 DWIDGET_USE_NAMESPACE
 
 class SpeedWidget : public QWidget
 {
+    Q_OBJECT
 public:
-    SpeedWidget(QWidget *parent = nullptr);
+    SpeedWidget(SettingModel *model, QWidget *parent = nullptr);
 
     void init();
 //    virtual QSize sizeHint() const override;
@@ -44,6 +45,11 @@ public slots:
     void onUpdateNet();
     void onUpdateCpu();
     void onUpdateMemory();
+    void onSetLabUpload(const QString upload);
+    void onSetLabDown(const QString down);
+    void onSetLabCpu(const QString cpu);
+    void onSetLabMemory(const QString memory);
+    void onUpAndDown(Qt::CheckState check);
 
 private:
     DLabel *m_labUpload;
@@ -65,6 +71,7 @@ private:
     long m_cpuAll;
     long m_cpuFree;
 
+    SettingModel *m_model;
 };
 
 #endif // SPEEDWIDGET_H

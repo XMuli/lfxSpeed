@@ -26,6 +26,7 @@ class QTimer;
 class SpeedInfo;
 class WinMain;
 class SpeedWidget;
+class SettingModel;
 
 DWIDGET_USE_NAMESPACE
 
@@ -52,10 +53,17 @@ public:
     virtual const QString itemContextMenu(const QString &itemKey) override;
     virtual void invokedMenuItem(const QString &itemKey, const QString &menuId, const bool checked) override;
 
+signals:
+    void labUpload(const QString &labUpload);
+
+public slots:
+    void onTest(const QString &labUpload);
+
 private:
     PluginProxyInterface *m_proxyInter;
     SpeedWidget *m_speedWidget;
-    WinMain *m_WinMain;
+    WinMain *m_winMain;
+    SettingModel *m_model;
 };
 
 #endif // SPEEDPLUGIN_H

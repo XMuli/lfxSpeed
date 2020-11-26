@@ -11,14 +11,25 @@ class DSpinBox;
 //class DComboBox;
 DWIDGET_END_NAMESPACE
 
+class SettingModel;
+
 DWIDGET_USE_NAMESPACE
 
 class WinMain : public DMainWindow
 {
+    Q_OBJECT
 public:
-    WinMain(QWidget *parent = 0);
+    WinMain(SettingModel *model, QWidget *parent = 0);
 
     void init();
+    inline DLineEdit* getUpload(){return m_lineUpload;}
+
+signals:
+    void sigLabUpload(QString lineUpload);
+    void sigLabDown(QString lineUpload);
+    void sigLabCpu(QString lineUpload);
+    void sigLabMemory(QString lineUpload);
+    void sigUpAndDown(Qt::CheckState check);
 
 private:
     DTabWidget *m_tab;
@@ -32,6 +43,8 @@ private:
     DSpinBox*  m_spinDecimalsNum;
     DSpinBox*  m_spinInterval;
     DComboBox* m_comSensitive;
+
+    SettingModel *m_model;
 };
 
 #endif // WINMAIN_H

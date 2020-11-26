@@ -9,10 +9,12 @@
 #include <QSpacerItem>
 #include <DSpinBox>
 #include <QWidget>
+#include "speedplugin.h"
+#include "settingmodel.h"
 
 DWIDGET_USE_NAMESPACE
 
-WinMain::WinMain(QWidget *parent)
+WinMain::WinMain(SettingModel *model, QWidget *parent)
     : DMainWindow(parent)
     , m_tab(new DTabWidget)
     , m_lineUpload(new DLineEdit)
@@ -24,8 +26,21 @@ WinMain::WinMain(QWidget *parent)
     , m_spinDecimalsNum(new DSpinBox)
     , m_spinInterval(new DSpinBox)
     , m_comSensitive(new DComboBox)
+    , m_model(model)
 {
     init();
+
+    connect(m_lineUpload, &DLineEdit::textChanged, this, &WinMain::sigLabUpload);
+    connect(m_lineDown, &DLineEdit::textChanged, this, &WinMain::sigLabDown);
+    connect(m_lineCpu, &DLineEdit::textChanged, this, &WinMain::sigLabCpu);
+    connect(m_lineMemory, &DLineEdit::textChanged, this, &WinMain::sigLabMemory);
+//    connect(m_checkUpAndDown, &DCheckBox::checkState, this, &WinMain::sigUpAndDown);
+
+    connect(this, &WinMain::sigLabUpload, m_model, &SettingModel::sigUploadChange);
+    connect(this, &WinMain::sigLabDown, m_model, &SettingModel::sigDownChange);
+    connect(this, &WinMain::sigLabCpu, m_model, &SettingModel::sigCpuChange);
+    connect(this, &WinMain::sigLabMemory, m_model, &SettingModel::sigMenoryChange);
+//    connect(this, &WinMain::sigUpAndDown, m_model, &SettingModel::sigUpAndDownChange); 槽函数还未实现
 }
 
 void WinMain::init()

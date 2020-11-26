@@ -25,10 +25,11 @@
 
 #include <DLabel>
 #include "speedinfo.h"
+#include "settingmodel.h"
 
 DWIDGET_USE_NAMESPACE
 
-SpeedWidget::SpeedWidget(QWidget *parent)
+SpeedWidget::SpeedWidget(SettingModel *model, QWidget *parent)
     : QWidget(parent)
     , m_labUpload(nullptr)
     , m_labDown(nullptr)
@@ -46,8 +47,14 @@ SpeedWidget::SpeedWidget(QWidget *parent)
     , m_upload(0)
     , m_cpuAll(0)
     , m_cpuFree(0)
+    , m_model(model)
 {
     init();
+
+    connect(m_model, &SettingModel::sigUploadChange, this, &SpeedWidget::onSetLabUpload);
+    connect(m_model, &SettingModel::sigDownChange, this, &SpeedWidget::onSetLabDown);
+    connect(m_model, &SettingModel::sigCpuChange, this, &SpeedWidget::onSetLabCpu);
+    connect(m_model, &SettingModel::sigMenoryChange, this, &SpeedWidget::onSetLabMemory);
 }
 
 /*!
@@ -78,13 +85,13 @@ void SpeedWidget::init()
     QGridLayout *layout = new QGridLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
 
-    m_labUpload = new DLabel(tr("↑:"));
+    m_labUpload = new DLabel(m_model->getStrUpload());
     m_labUpload->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    m_labDown = new DLabel(tr("↓:"));
+    m_labDown = new DLabel(m_model->getStrDown());
     m_labDown->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    m_labCpu = new DLabel(tr(" CPU:"));
+    m_labCpu = new DLabel(m_model->getStrCpu());
     m_labCpu->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    m_labMemory = new DLabel(tr(" MEM:"));
+    m_labMemory = new DLabel(m_model->getStrMemory());
     m_labMemory->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     layout->addWidget(m_labUpload, 0, 0);
     layout->addWidget(m_numUpload, 0, 1);
@@ -159,4 +166,30 @@ void SpeedWidget::onUpdateMemory()
 
     m_info->memoryRate(memory, memoryAll, swap, swapAll);
     m_numMemory->setText(QString("%1%").arg(memory * 100.0 / memoryAll, 0, 'f', 2, QLatin1Char(' ')));
+}
+
+void SpeedWidget::onSetLabUpload(const QString upload)
+{
+    m_labUpload->setText(upload);
+}
+
+void SpeedWidget::onSetLabDown(const QString down)
+{
+    m_labDown->setText(down);
+}
+
+void SpeedWidget::onSetLabCpu(const QString cpu)
+{
+    m_labCpu->setText(cpu);
+}
+
+void SpeedWidget::onSetLabMemory(const QString memory)
+{
+    m_labMemory->setText(memory);
+}
+
+void SpeedWidget::onUpAndDown(Qt::CheckState check)
+{
+//    if (check == Qt::Checked)
+    // TODO: 上传核下载互相换位置
 }
