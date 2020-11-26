@@ -54,6 +54,8 @@ public:
     void memoryRate(long &memory, long &memoryAll, long &swap, long &swapAll);
     QString setRateUnitSensitive(RateUnit unit, Sensitive sensitive = SpeedInfo::Default);
     double autoRateUnits(long speed, RateUnit &unit);
+    void uptime(double &run, double &idle);
+    QString autoTimeUnits(double time);
 };
 
 #endif // SPEEDINFO_H

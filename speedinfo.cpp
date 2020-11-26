@@ -255,4 +255,33 @@ double SpeedInfo::autoRateUnits(long speed, SpeedInfo::RateUnit &unit)
     return sp;
 }
 
+void SpeedInfo::uptime(double &run, double &idle)
+{
+    run = 0;
+    idle = 0;
+
+    QFile file(PROC_PATH_UPTIME);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        qDebug()<<"\"/proc/uptime\" don't open!";
+        return;
+    }
+
+    QTextStream stream(&file);
+    QString line = stream.readLine();
+    QStringList list = line.split(QRegExp("\\s{1,}"));   // 匹配任意 大于等于1个的 空白字符
+    if (!list.isEmpty()) {
+        run = list.at(0).toDouble();
+        idle = list.at(1).toDouble();
+    }
+
+    file.close();
+}
+
+QString SpeedInfo::autoTimeUnits(double time)
+{
+    int ms = (time - qFloor(time)) * 1000;
+    QString strTime = QString(tr("已系统已运行: ")) + QDateTime::fromSecsSinceEpoch(time / 1000).toString("dd 天, hh:MM:ss:") + QString::number(ms);
+    return strTime;
+}
+
 
