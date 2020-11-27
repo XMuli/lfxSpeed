@@ -22,6 +22,9 @@
 #include <QPainter>
 #include <QTimer>
 #include <QDateTime>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QPushButton>
 
 #include <DLabel>
 #include "settingmodel.h"
@@ -80,6 +83,15 @@ SpeedWidget::SpeedWidget(SettingModel *model, QWidget *parent)
  */
 void SpeedWidget::init()
 {   
+    m_labUpload = new DLabel(m_model->getStrUpload());
+    m_labUpload->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    m_labDown = new DLabel(m_model->getStrDown());
+    m_labDown->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    m_labCpu = new DLabel(m_model->getStrCpu());
+    m_labCpu->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    m_labMemory = new DLabel(m_model->getStrMemory());
+    m_labMemory->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+
     m_numUpload = new DLabel(tr("0 Kb/s"));
     m_numUpload->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     m_numDown = new DLabel(tr("0 Kb/s"));
@@ -92,31 +104,65 @@ void SpeedWidget::init()
 //    m_diskWrite = new DLabel(tr("↙: 0 kb/s"));
 
 
-    layout = new QGridLayout(this);
+    QVBoxLayout *VLayout1 = new QVBoxLayout();
+    VLayout1->setContentsMargins(0, 0, 0, 0);
+    VLayout1->addWidget(m_labUpload);
+    VLayout1->addWidget(m_labDown);
+    QVBoxLayout *VLayout2 = new QVBoxLayout();
+    VLayout2->setContentsMargins(0, 0, 0, 0);
+    VLayout2->addWidget(m_numUpload);
+    VLayout2->addWidget(m_numDown);
+    QVBoxLayout *VLayout3 = new QVBoxLayout();
+    VLayout3->setContentsMargins(0, 0, 0, 0);
+    VLayout3->addWidget(m_labCpu);
+    VLayout3->addWidget(m_labMemory);
+    QVBoxLayout *VLayout4 = new QVBoxLayout();
+    VLayout4->setContentsMargins(0, 0, 0, 0);
+    VLayout4->addWidget(m_numCpu);
+    VLayout4->addWidget(m_numMemory);
+
+    QHBoxLayout *hLayout = new QHBoxLayout();
+    hLayout->setContentsMargins(0, 0, 0, 0);
+    hLayout->addLayout(VLayout1);
+    hLayout->addLayout(VLayout2);
+    hLayout->addLayout(VLayout3);
+    hLayout->addLayout(VLayout4);
+    setLayout(hLayout);
+
+
+
+    layout = new QGridLayout();
     layout->setContentsMargins(0, 0, 0, 0);
-    m_labUpload = new DLabel(m_model->getStrUpload());
-    m_labUpload->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    m_labDown = new DLabel(m_model->getStrDown());
-    m_labDown->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    m_labCpu = new DLabel(m_model->getStrCpu());
-    m_labCpu->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    m_labMemory = new DLabel(m_model->getStrMemory());
-    m_labMemory->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    layout->addWidget(m_labUpload, 0, 0);
-    layout->addWidget(m_numUpload, 0, 1);
-    layout->addWidget(m_labDown, 1, 0);
-    layout->addWidget(m_numDown, 1, 1);
-    layout->addWidget(m_labCpu, 0, 2);
-    layout->addWidget(m_numCpu, 0, 3);
-    layout->addWidget(m_labMemory, 1, 2);
-    layout->addWidget(m_numMemory, 1, 3);
+//    QVBoxLayout *VLayout = new QVBoxLayout();
+
+//    QHBoxLayout *hLayout2 = new QHBoxLayout();
+//    VLayout->setContentsMargins(0, 0, 0, 0);
+//    hLayout1->setContentsMargins(0, 0, 0, 0);
+//    hLayout2->setContentsMargins(0, 0, 0, 0);
+//    hLayout1->addWidget(m_labUpload);
+//    hLayout1->addWidget(m_numUpload);
+//    hLayout1->addWidget(m_labCpu);
+//    hLayout1->addWidget(m_numCpu);
+//    hLayout2->addWidget(m_labDown);
+//    hLayout2->addWidget(m_numDown);
+//    hLayout2->addWidget(m_labMemory);
+//    hLayout2->addWidget(m_numMemory);
+
+
+//    VLayout->addLayout(hLayout1);
+//    VLayout->addLayout(hLayout2);
+//    setLayout(VLayout);
+//    layout->addWidget(m_labUpload, 0, 0);
+//    layout->addWidget(m_numUpload, 0, 1);
+//    layout->addWidget(m_labDown, 1, 0);
+//    layout->addWidget(m_numDown, 1, 1);
+//    layout->addWidget(m_labCpu, 0, 2);
+//    layout->addWidget(m_numCpu, 0, 3);
+//    layout->addWidget(m_labMemory, 1, 2);
+//    layout->addWidget(m_numMemory, 1, 3);
 //    layout->addWidget(m_diskRead, 0, 2);
 //    layout->addWidget(m_diskWrite, 1, 2);
 
-
-
-//    layout->removeWidget(m_labUpload);
-//    layout->removeWidget(m_numUpload);
     qDebug()<<"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+>"<<layout<<layout->children();
 
     m_info = new SpeedInfo(this);
@@ -241,13 +287,13 @@ void SpeedWidget::onSensitive(const int index)
 void SpeedWidget::onShowUp(int status)
 {
     if (checkToBool(status)) {
-        layout->addWidget(m_labUpload, 0, 0);
-        layout->addWidget(m_numUpload, 0, 1);
+//        layout->addWidget(m_labUpload, 0, 0);
+//        layout->addWidget(m_numUpload, 0, 1);
         m_labUpload->show();
         m_numUpload->show();
     } else {
-        layout->removeWidget(m_labUpload);
-        layout->removeWidget(m_numUpload);
+//        layout->removeWidget(m_labUpload);
+//        layout->removeWidget(m_numUpload);
         m_labUpload->hide();
         m_numUpload->hide();
     }
@@ -264,13 +310,13 @@ void SpeedWidget::onShowUp(int status)
 void SpeedWidget::onShowDown(int status)
 {
     if (checkToBool(status)) {
-        layout->addWidget(m_labDown, 1, 0);
-        layout->addWidget(m_numDown, 1, 1);
+//        layout->addWidget(m_labDown, 1, 0);
+//        layout->addWidget(m_numDown, 1, 1);
         m_labDown->show();
         m_numDown->show();
     } else {
-        layout->removeWidget(m_labDown);
-        layout->removeWidget(m_numDown);
+//        layout->removeWidget(m_labDown);
+//        layout->removeWidget(m_numDown);
         m_labDown->hide();
         m_numDown->hide();
     }
@@ -281,13 +327,13 @@ void SpeedWidget::onShowDown(int status)
 void SpeedWidget::onShowCPU(int status)
 {
     if (checkToBool(status)) {
-        layout->addWidget(m_labCpu, 0, 2);
-        layout->addWidget(m_numCpu, 0, 3);
+//        layout->addWidget(m_labCpu, 0, 2);
+//        layout->addWidget(m_numCpu, 0, 3);
         m_labCpu->show();
         m_numCpu->show();
     } else {
-        layout->removeWidget(m_labCpu);
-        layout->removeWidget(m_numCpu);
+//        layout->removeWidget(m_labCpu);
+//        layout->removeWidget(m_numCpu);
         m_labCpu->hide();
         m_numCpu->hide();
     }
@@ -303,13 +349,13 @@ void SpeedWidget::onShowMem(int status)
 
 
     if (checkToBool(status)) {
-        layout->addWidget(m_labMemory, 1, 2);
-        layout->addWidget(m_numMemory, 1, 3);
+//        layout->addWidget(m_labMemory, 1, 2);
+//        layout->addWidget(m_numMemory, 1, 3);
         m_labMemory->show();
         m_numMemory->show();
     } else {
-        layout->removeWidget(m_labMemory);
-        layout->removeWidget(m_numMemory);
+//        layout->removeWidget(m_labMemory);
+//        layout->removeWidget(m_numMemory);
         m_labMemory->hide();
         m_numMemory->hide();
     }
