@@ -20,13 +20,14 @@
 
 #include <QWidget>
 #include <dtkwidget_global.h>
+#include "speedinfo.h"
 
 DWIDGET_BEGIN_NAMESPACE
 class DLabel;
 DWIDGET_END_NAMESPACE
 
 class QTimer;
-class SpeedInfo;
+class QGridLayout;
 class SettingModel;
 
 DWIDGET_USE_NAMESPACE
@@ -39,6 +40,8 @@ public:
 
     void init();
 //    virtual QSize sizeHint() const override;
+
+//    void resizeEvent(QResizeEvent *event);
 //    virtual void paintEvent(QPaintEvent *event) override;
     QString m_runTime;
 
@@ -51,7 +54,18 @@ public slots:
     void onSetLabCpu(const QString cpu);
     void onSetLabMemory(const QString memory);
     void onUpAndDown(Qt::CheckState check);
+    void onDecimalsNum(const int num);
+    void onUpdateInterval(const int ms);
+    void onSensitive(const int index);
+
+    void onShowUp(int status);
+    void onShowDown(int status);
+    void onShowCPU(int status);
+    void onShowMem(int status);
     QString onRunTime();
+
+private:
+    bool checkToBool(int status);
 
 private:
     DLabel *m_labUpload;
@@ -66,6 +80,8 @@ private:
     DLabel *m_diskRead;
     DLabel *m_diskWrite;
     QTimer *m_timer;
+    int m_DecimalsNum;
+    SpeedInfo::Sensitive m_Sensitive;
     SpeedInfo *m_info;
 
     long m_down;
@@ -73,7 +89,12 @@ private:
     long m_cpuAll;
     long m_cpuFree;
 
+    QGridLayout *layout;
+
     SettingModel *m_model;
+
+    // QWidget interface
+protected:
 };
 
 #endif // SPEEDWIDGET_H

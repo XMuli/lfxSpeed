@@ -3,12 +3,12 @@
 
 #include <DMainWindow>
 #include <DTabWidget>
+#include <DCheckBox>
 
 DWIDGET_BEGIN_NAMESPACE
 class DLineEdit;
 class DSpinBox;
 //class DCheckBox; 奇怪, 怎么还不能声明了? 已经知道了
-//class DComboBox;
 DWIDGET_END_NAMESPACE
 
 class SettingModel;
@@ -29,7 +29,16 @@ signals:
     void sigLabDown(QString lineUpload);
     void sigLabCpu(QString lineUpload);
     void sigLabMemory(QString lineUpload);
-    void sigUpAndDown(Qt::CheckState check);
+    void sigDecimalsNum(const int num);
+    void sigInterval(const int ms);
+    void sigSensitive(const int index);
+
+    void sigShowUp(int status);
+    void sigShowDown(int status);
+    void sigShowCPU(int status);
+    void sigShowMem(int status);
+    void sigMousTip(int status);
+    void sigUpAndDown(int status);
 
 private:
     DTabWidget *m_tab;
@@ -40,6 +49,10 @@ private:
     DLineEdit* m_lineMemory;
     DCheckBox* m_checkUpAndDown;
     DCheckBox* m_checkMouseTips;
+    DCheckBox* m_checkShowUp;
+    DCheckBox* m_checkShowDown;
+    DCheckBox* m_checkShowCPU;
+    DCheckBox* m_checkShowMem;
     DSpinBox*  m_spinDecimalsNum;
     DSpinBox*  m_spinInterval;
     DComboBox* m_comSensitive;

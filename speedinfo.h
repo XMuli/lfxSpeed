@@ -55,7 +55,7 @@ public:
     QString setRateUnitSensitive(RateUnit unit, Sensitive sensitive = SpeedInfo::Default);
     double autoRateUnits(long speed, RateUnit &unit);
     void uptime(double &run, double &idle);
-    QString autoTimeUnits(double time);
+    QString autoTimeUnits(double s);
 };
 
 #endif // SPEEDINFO_H

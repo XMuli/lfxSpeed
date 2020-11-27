@@ -40,8 +40,14 @@ signals:
     void sigMenoryChange(QString upload);
 //    void sigUpAndDownChange(Qt::CheckState check);
 //    void sigMouseTipsChange(Qt::CheckState check);
-//    void sigDecimalsNumChange(int num);
-//    void sigInterval(int ms);
+    void sigDecimalsNumChange(const int num);
+    void sigIntervalChange(const int ms);
+    void sigSensitiveChange(const int index);
+
+    void sigShowUpChange(int status);
+    void sigShowDownChange(int status);
+    void sigShowCPUChange(int status);
+    void sigShowMemChange(int status);
 
 private:
     QString m_strUpload;

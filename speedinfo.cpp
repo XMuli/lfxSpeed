@@ -25,6 +25,7 @@
 #include <QThread>
 #include <QtMath>
 #include <QTimer>
+#include <QTime>
 #include <QDateTime>
 
 #define PROC_PATH_UPTIME    "/proc/uptime"      // "系统启动" 和 "系统空闲" 的时间
@@ -277,11 +278,21 @@ void SpeedInfo::uptime(double &run, double &idle)
     file.close();
 }
 
-QString SpeedInfo::autoTimeUnits(double time)
+QString SpeedInfo::autoTimeUnits(double s)
 {
-    QString strTime = QString(tr("系统已运行: ")) + QDateTime::fromSecsSinceEpoch(time, Qt::UTC).toString("dd 天, hh:MM:ss:");
-    qDebug()<<"-------------------------_>"<<time<<strTime;
-    return strTime;
+    int time = qFloor(s);
+    int ss = time % 60;
+    int MM = (time % 3600) / 60;
+    int hh = (time % 86400) / 3600;
+    int dd = time / 86400;
+
+    QString runTime = QString(tr("系统已运行: %1天, %2:%3:%4"))
+            .arg(dd, 0, 'f', 0, QLatin1Char(' '))
+            .arg(hh, 2, 'f', 0, QLatin1Char('0'))
+            .arg(MM, 2, 'f', 0, QLatin1Char('0'))
+            .arg(ss, 2, 'f', 0, QLatin1Char('0'));
+
+    return runTime;
 }
 
 

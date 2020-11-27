@@ -23,6 +23,10 @@ WinMain::WinMain(SettingModel *model, QWidget *parent)
     , m_lineMemory(new DLineEdit)
     , m_checkUpAndDown(new DCheckBox)
     , m_checkMouseTips(new DCheckBox)
+    , m_checkShowUp(new DCheckBox)
+    , m_checkShowDown(new DCheckBox)
+    , m_checkShowCPU(new DCheckBox)
+    , m_checkShowMem(new DCheckBox)
     , m_spinDecimalsNum(new DSpinBox)
     , m_spinInterval(new DSpinBox)
     , m_comSensitive(new DComboBox)
@@ -34,12 +38,29 @@ WinMain::WinMain(SettingModel *model, QWidget *parent)
     connect(m_lineDown, &DLineEdit::textChanged, this, &WinMain::sigLabDown);
     connect(m_lineCpu, &DLineEdit::textChanged, this, &WinMain::sigLabCpu);
     connect(m_lineMemory, &DLineEdit::textChanged, this, &WinMain::sigLabMemory);
-//    connect(m_checkUpAndDown, &DCheckBox::checkState, this, &WinMain::sigUpAndDown);
+    void (DSpinBox:: *valueChanged)(int) = &DSpinBox::valueChanged;
+    connect(m_spinDecimalsNum, valueChanged, this, &WinMain::sigDecimalsNum);
+    connect(m_spinInterval, valueChanged, this, &WinMain::sigInterval);
+    void (DComboBox:: *currentIndexChanged)(int index) = &DComboBox::currentIndexChanged;
+    connect(m_comSensitive, currentIndexChanged, this, &WinMain::sigSensitive);
+
+    connect(m_checkShowUp, &DCheckBox::stateChanged, this, &WinMain::sigShowUp);
+    connect(m_checkShowDown, &DCheckBox::stateChanged, this, &WinMain::sigShowDown);
+    connect(m_checkShowCPU, &DCheckBox::stateChanged, this, &WinMain::sigShowCPU);
+    connect(m_checkShowMem, &DCheckBox::stateChanged, this, &WinMain::sigShowMem);
+    //    connect(m_checkUpAndDown, &DCheckBox::checkState, this, &WinMain::sigUpAndDown);
 
     connect(this, &WinMain::sigLabUpload, m_model, &SettingModel::sigUploadChange);
     connect(this, &WinMain::sigLabDown, m_model, &SettingModel::sigDownChange);
     connect(this, &WinMain::sigLabCpu, m_model, &SettingModel::sigCpuChange);
     connect(this, &WinMain::sigLabMemory, m_model, &SettingModel::sigMenoryChange);
+    connect(this, &WinMain::sigDecimalsNum, m_model, &SettingModel::sigDecimalsNumChange);
+    connect(this, &WinMain::sigInterval, m_model, &SettingModel::sigIntervalChange);
+    connect(this, &WinMain::sigSensitive, m_model, &SettingModel::sigSensitiveChange);
+    connect(this, &WinMain::sigShowUp, m_model, &SettingModel::sigShowUpChange);
+    connect(this, &WinMain::sigShowDown, m_model, &SettingModel::sigShowDownChange);
+    connect(this, &WinMain::sigShowCPU, m_model, &SettingModel::sigShowCPUChange);
+    connect(this, &WinMain::sigShowMem, m_model, &SettingModel::sigShowMemChange);
 //    connect(this, &WinMain::sigUpAndDown, m_model, &SettingModel::sigUpAndDownChange); 槽函数还未实现
 }
 
@@ -88,12 +109,24 @@ void WinMain::init()
     gridShowText->addItem(vSpacer2, 5, 0);
 
     QGridLayout* gridCheck = new QGridLayout();
-    m_checkUpAndDown->setCheckState(Qt::Unchecked);
-    m_checkUpAndDown->setText(tr("交换上传和下载的位置"));
-    gridCheck->addWidget(m_checkUpAndDown, 2, 0);
+    m_checkShowUp->setCheckState(Qt::Checked);
+    m_checkShowUp->setText(tr("显示上传网速"));
+    gridCheck->addWidget(m_checkShowUp, 0, 0);
+    m_checkShowDown->setCheckState(Qt::Checked);
+    m_checkShowDown->setText(tr("显示下载网速"));
+    gridCheck->addWidget(m_checkShowDown, 0, 1);
+    m_checkShowCPU->setCheckState(Qt::Checked);
+    m_checkShowCPU->setText(tr("显示CPU"));
+    gridCheck->addWidget(m_checkShowCPU, 0, 2);
+    m_checkShowMem->setCheckState(Qt::Checked);
+    m_checkShowMem->setText(tr("显示内存"));
+    gridCheck->addWidget(m_checkShowMem, 0, 3);
     m_checkMouseTips->setCheckState(Qt::Checked);
     m_checkMouseTips->setText(tr("显示鼠标提示"));
-    gridCheck->addWidget(m_checkMouseTips, 2, 1);
+    gridCheck->addWidget(m_checkMouseTips, 1, 0);
+    m_checkUpAndDown->setCheckState(Qt::Unchecked);
+    m_checkUpAndDown->setText(tr("上传下载互换"));
+    gridCheck->addWidget(m_checkUpAndDown, 1, 1);
 
     QVBoxLayout* vLayout = new QVBoxLayout(boxShowText);
     vLayout->addLayout(gridShowText, 0);
