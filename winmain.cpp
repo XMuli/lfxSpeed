@@ -95,7 +95,7 @@ void WinMain::init()
     m_spinDecimalsNum->setSingleStep(1);
     gridShowText->addWidget(m_spinDecimalsNum, 3, 1);
     gridShowText->addWidget(new DLabel(tr("刷新时隔:")), 3, 2);
-    m_spinInterval->setRange(0, 2147483647);
+    m_spinInterval->setRange(1000, 2147483647);
     m_spinInterval->setValue(1000);
     m_spinInterval->setSingleStep(1000);
     m_spinInterval->setSuffix(tr("ms"));
