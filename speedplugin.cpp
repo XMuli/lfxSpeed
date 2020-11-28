@@ -24,6 +24,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QTimer>
+#include <QDebug>
 
 DWIDGET_USE_NAMESPACE
 
@@ -32,16 +33,16 @@ SpeedPlugin::SpeedPlugin(QObject *parent)
     , m_winMain(nullptr)
     , m_speedWidget(nullptr)
     , m_proxyInter(nullptr)
+    , m_bMouseTip(true)
 {
-    m_timer.setInterval(1000);
     connect(&m_timer, &QTimer::timeout, this, &SpeedPlugin::onUpdateTip);
+    m_timer.setInterval(1000);
     m_timer.start();
 }
 
 const QString SpeedPlugin::pluginName() const
 {
 //    return QString("lfxSpeed");
-
     return "datetime";  // 假装我也叫这个，否则会被压缩，在 1.2.3 版本中才被修改
 }
 
@@ -53,6 +54,7 @@ void SpeedPlugin::init(PluginProxyInterface *proxyInter)
     m_speedWidget = new SpeedWidget(m_model);
     m_winMain = new WinMain(m_model);
 
+    connect(m_winMain, &WinMain::sigMousTip, this, &SpeedPlugin::onMouseTip);
     // 如果插件没有被禁用, 则在初始化插件时才添加主控件到面板上
     if (!pluginIsDisable())
         m_proxyInter->itemAdded(this, pluginName());
@@ -101,7 +103,13 @@ const QString SpeedPlugin::itemContextMenu(const QString &itemKey)
     Q_UNUSED(itemKey);
 
     QList<QVariant> items;
-    items.reserve(2);
+    items.reserve(3);
+
+    QMap<QString, QVariant> update;
+    update["itemId"] = "update";
+    update["itemText"] = "刷新";
+    update["isActive"] = true;
+    items.push_back(update);
 
     QMap<QString, QVariant> setting;
     setting["itemId"] = "setting";
@@ -131,7 +139,10 @@ void SpeedPlugin::invokedMenuItem(const QString &itemKey, const QString &menuId,
 
     qApp->setAttribute(Qt::AA_UseHighDpiPixmaps);
 
-    if (menuId == "setting") {
+    if (menuId == "update") {
+        m_proxyInter->itemRemoved(this, pluginName());
+        m_proxyInter->itemAdded(this, pluginName());
+    } else if (menuId == "setting") {
         m_winMain->move((QApplication::desktop()->width() - m_winMain->width())/2,(QApplication::desktop()->height() - m_winMain->height())/2);
         m_winMain->show();
     } else if (menuId == "about") {
@@ -143,10 +154,21 @@ void SpeedPlugin::invokedMenuItem(const QString &itemKey, const QString &menuId,
 QWidget *SpeedPlugin::itemTipsWidget(const QString &itemKey)
 {
     Q_UNUSED(itemKey)
-    return &m_labTip;
+    if (m_bMouseTip)
+        return &m_labTip;
+    else
+        return nullptr;
 }
 
 void SpeedPlugin::onUpdateTip()
 {
     m_labTip.setText(m_speedWidget->m_runTime);
+}
+
+void SpeedPlugin::onMouseTip(int status)
+{
+    if (status == Qt::Checked)
+        m_bMouseTip = true;
+    else
+        m_bMouseTip = false;
 }

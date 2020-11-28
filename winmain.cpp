@@ -1,3 +1,20 @@
+/*
+ * Copyright (c) 2020 xmuli
+ *
+ * Author:  xmuli(偕臧) xmulitech@gmail.com
+ * GitHub:  https://github.com/xmuli
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * */
+
 #include "winmain.h"
 #include <QVBoxLayout>
 #include <QGridLayout>
@@ -48,6 +65,7 @@ WinMain::WinMain(SettingModel *model, QWidget *parent)
     connect(m_checkShowDown, &DCheckBox::stateChanged, this, &WinMain::sigShowDown);
     connect(m_checkShowCPU, &DCheckBox::stateChanged, this, &WinMain::sigShowCPU);
     connect(m_checkShowMem, &DCheckBox::stateChanged, this, &WinMain::sigShowMem);
+    connect(m_checkMouseTips, &DCheckBox::stateChanged, this, &WinMain::sigMousTip);
     //    connect(m_checkUpAndDown, &DCheckBox::checkState, this, &WinMain::sigUpAndDown);
 
     connect(this, &WinMain::sigLabUpload, m_model, &SettingModel::sigUploadChange);
@@ -126,7 +144,7 @@ void WinMain::init()
     gridCheck->addWidget(m_checkMouseTips, 1, 0);
     m_checkUpAndDown->setCheckState(Qt::Unchecked);
     m_checkUpAndDown->setText(tr("上传下载互换"));
-    gridCheck->addWidget(m_checkUpAndDown, 1, 1);
+//    gridCheck->addWidget(m_checkUpAndDown, 1, 1);
 
     QVBoxLayout* vLayout = new QVBoxLayout(boxShowText);
     vLayout->addLayout(gridShowText, 0);

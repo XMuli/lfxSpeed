@@ -45,7 +45,7 @@ void AboutDialog::init()
     QVBoxLayout *vLayout = new QVBoxLayout(content);
     vLayout->setContentsMargins(0, 0, 0, 0);
     vLayout->addSpacing(15);
-    DLabel *labVersion = new DLabel(tr("Version: 0.4  2020/11/26"));
+    DLabel *labVersion = new DLabel(tr("Version: 0.5  2020/11/28"));
     DLabel *labCopyright = new DLabel(tr("Copyright (c) 2020 By 偕臧"));
     vLayout->addWidget(labVersion, 0, Qt::AlignCenter);
     vLayout->addWidget(labCopyright, 0, Qt::AlignCenter);

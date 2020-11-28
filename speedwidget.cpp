@@ -103,7 +103,6 @@ void SpeedWidget::init()
 //    m_diskRead = new DLabel(tr("↗: 0 kb/s"));
 //    m_diskWrite = new DLabel(tr("↙: 0 kb/s"));
 
-
     QVBoxLayout *VLayout1 = new QVBoxLayout();
     VLayout1->setContentsMargins(0, 0, 0, 0);
     VLayout1->addWidget(m_labUpload);
@@ -128,8 +127,6 @@ void SpeedWidget::init()
     hLayout->addLayout(VLayout3);
     hLayout->addLayout(VLayout4);
     setLayout(hLayout);
-
-
 
     layout = new QGridLayout();
     layout->setContentsMargins(0, 0, 0, 0);
@@ -163,7 +160,7 @@ void SpeedWidget::init()
 //    layout->addWidget(m_diskRead, 0, 2);
 //    layout->addWidget(m_diskWrite, 1, 2);
 
-    qDebug()<<"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+>"<<layout<<layout->children();
+//    qDebug()<<"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+>"<<layout<<layout->children();
 
     m_info = new SpeedInfo(this);
     m_info->netRate(m_down, m_upload);
@@ -301,10 +298,6 @@ void SpeedWidget::onShowUp(int status)
 //    updateGeometry();
 //    update();
 //    adjustSize();
-
-    qDebug()<<"-------------------------------->"<<checkToBool(status)<<layout<<layout->children();
-
-    qDebug()<<"#################################1"<<layout->columnCount()<<layout->rowCount();
 }
 
 void SpeedWidget::onShowDown(int status)
@@ -320,8 +313,6 @@ void SpeedWidget::onShowDown(int status)
         m_labDown->hide();
         m_numDown->hide();
     }
-
-    qDebug()<<"#################################2"<<layout->columnCount()<<layout->rowCount();
 }
 
 void SpeedWidget::onShowCPU(int status)
@@ -337,8 +328,6 @@ void SpeedWidget::onShowCPU(int status)
         m_labCpu->hide();
         m_numCpu->hide();
     }
-
-    qDebug()<<"#################################3"<<layout->columnCount()<<layout->rowCount();
 }
 
 void SpeedWidget::onShowMem(int status)
@@ -359,8 +348,6 @@ void SpeedWidget::onShowMem(int status)
         m_labMemory->hide();
         m_numMemory->hide();
     }
-
-    qDebug()<<"#################################4"<<layout->columnCount()<<layout->rowCount();
 }
 
 QString SpeedWidget::onRunTime()

@@ -60,6 +60,7 @@ signals:
 
 public slots:
     void onUpdateTip();
+    void onMouseTip(int status);
 
 private:
     PluginProxyInterface *m_proxyInter;
@@ -69,6 +70,7 @@ private:
 
     DLabel m_labTip;
     QTimer m_timer;
+    bool m_bMouseTip;
 };
 
 #endif // SPEEDPLUGIN_H

@@ -167,7 +167,7 @@ QString SpeedInfo::setRateUnitSensitive(RateUnit unit, Sensitive sensitive)
         case RateUnit::RateBit:
             return QString("BIT/S");
         case RateUnit::RateByte:
-            return QString("BYTE/S");
+            return QString("B/S");
         case RateUnit::RateKb:
             return QString("KB/S");
         case RateUnit::RateMb:
@@ -186,7 +186,7 @@ QString SpeedInfo::setRateUnitSensitive(RateUnit unit, Sensitive sensitive)
         case RateUnit::RateBit:
             return QString("bit/s");
         case RateUnit::RateByte:
-            return QString("byte/s");
+            return QString("b/s");
         case RateUnit::RateKb:
             return QString("kb/s");
         case RateUnit::RateMb:
@@ -252,7 +252,6 @@ double SpeedInfo::autoRateUnits(long speed, SpeedInfo::RateUnit &unit)
         sp = -1;
     }
 
-//    qDebug()<<"-------->sp:"<<sp<<"    "<<"speed:"<<speed<<"   unit:"<<unit;
     return sp;
 }
 

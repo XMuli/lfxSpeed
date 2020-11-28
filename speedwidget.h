@@ -40,7 +40,6 @@ public:
 
     void init();
 //    virtual QSize sizeHint() const override;
-
 //    void resizeEvent(QResizeEvent *event);
 //    virtual void paintEvent(QPaintEvent *event) override;
     QString m_runTime;
@@ -90,11 +89,7 @@ private:
     long m_cpuFree;
 
     QGridLayout *layout;
-
     SettingModel *m_model;
-
-    // QWidget interface
-protected:
 };
 
 #endif // SPEEDWIDGET_H
