@@ -119,11 +119,12 @@ void SpeedInfo::netRate(long &netDown, long &netUpload)
     line  = stream.readLine();
     line  = stream.readLine();
     while (!line.isNull()) {
+        line = line.trimmed();
         QStringList list = line.split(QRegExp("\\s{1,}"));   // 匹配任意 大于等于1个的 空白字符
 
         if (!list.isEmpty()) {
-            down = list.at(2).toLong();
-            upload = list.at(10).toLong();
+            down = list.at(1).toLong();
+            upload = list.at(9).toLong();
         }
 
         netDown += down;
