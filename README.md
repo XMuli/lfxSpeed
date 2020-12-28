@@ -1,67 +1,56 @@
 # lfxSpeed
-一款轻巧、快速的网速插件。
+<p align="right"><br><a href="README.md">English</a> | <a href="README.zh_CN.md">简体中文</a> | <a href="README.zh_TW.md">繁體中文</a></p>
 
+A lightweight and fast Internet speed plugin.
 
-
-<img src="docs/images/Fashion Patterns.png" alt="Fashion Patterns" />
-
-<img src="docs/images/Efficient Mode.png" alt="Efficient Mode" />
+<img src="images/lfxSpeed.gif" alt="lfxSpeed" width="70%;" />
 
 <br>
 
-## 目录
+## Contents.
 
-- [背景](#背景)
-- [编译](#编译)
-- [安装](#安装)
-- [卸载](#卸载)
-- [使用](#使用)
-- [维护者](#维护者)
-- [许可协议](#许可协议)
+- [background](#background)
+- [Compile](#Compile)
+- [Uninstall](#Uninstall)
+- [Maintainer](#Maintainer)
+- [License](#License)
 
 <br>
 
-### 背景
+### Background
 
-认为`DDE` 环境桌面很漂亮， `Deepin` 爱好者，同时也是开发者之一，看习惯了在其他系统上有一个任务栏网速插件，但此 `Deepin v20 / UOS v20`上没有，于是便有了这个项目。此适用于 `DDE` 桌面环境的 `Linux` 发行版、如 `Deepin / UOS `上。
-
-
-
-这个仓库的目标是：
-
-1. 一个显示实时网速插件，且能长期维护更新
-2. 一个编码插件的项目示范
+I think `DDE` environment desktop is beautiful, `Deepin` lover, and also one of the developers, see used to have a taskbar net speed plugin on other systems, but not on this `Deepin v20 / UOS v20`, so I have this project. This works on `DDE` desktop environment for `Linux` distributions such as `Deepin / UOS`.
 
 <br>
 
-### 编译
+<img src="images/setting.png" alt="setting" width="55%;" />   <img src="images/Author.png" alt="Author" width="40%;" />
 
-采用 `cmake` 构建，进入源码目录后，执行如下：
+<br>
+
+### Compile
+
+Using the ``cmake`` build, after entering the source directory, execute the following.
 
 ```bash
-mkdir build
-cd build
+mkdir build && cd build
 cmake ..
 make -j16
+sudo make install
 ```
 
-或直接使用 `IDE` 点击构建按钮（非运行按钮）
+Or just use `IDE` to click the build button (not the run button) and copy the shared libraries manually: `sudo cp liblfxSpeed.so /usr/lib/dde-dock/plugins`.
 
 <br>
 
-### 安装
+**Note:** If it doesn't take effect, you can execute `killall dde-dock` to restart the taskbar and it will take effect
 
-会生成一个 `liblfxSpeed.so` 共享库；在此路径下执行如下：
-
-```bash
-sudo cp liblfxSpeed.so /usr/lib/dde-dock/plugins
-```
+**Development Documentation:** [Deepin Development Taskbar Internet Speed Plugin lfxSpeed](https://xmuli.tech/posts/c225b552/) or [link](https://xmuli.blog.csdn.net/article/details/110672252)
 
 <br>
 
-### 卸载
+### Uninstall
 
-任意路径下执行如下：
+Execute the following in any path.
 
 ```bash
 sudo rm -rf /usr/lib/dde-dock/plugins/liblfxSpeed.so
@@ -69,24 +58,18 @@ sudo rm -rf /usr/lib/dde-dock/plugins/liblfxSpeed.so
 
 <br>
 
-### 使用
-
-采用运行时候加载，安装或者卸载后，都需要执行如下命令，重启任务栏后会生效
-
-```bash
-killall dde-dock
-dde-dock
-```
-
-<br>
-
-### 维护者
+### Maintainer
 
 [@偕臧](https://github.com/xmuli)
 
 <br>
 
-### 许可协议
+### Other.
 
-![](https://img.shields.io/github/license/xmuli/lfxSpeed)  [MIT](LICENSE) © xmuli <偕臧>
+This project is no longer maintained; but based on its ideas and new implementation goals, the source code will be redesigned to achieve a more powerful network speed plug-in, will also provide the corresponding library to facilitate the secondary development of later, the new project in [lfxNet](https://github.com/xmuli/lfxNet), Wuhu ~
 
+<br>
+
+### License 
+
+![](https://img.shields.io/github/license/xmuli/lfxSpeed) [MIT](LICENSE) © xmuli <偕臧>
