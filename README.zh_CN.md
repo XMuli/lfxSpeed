@@ -1,7 +1,6 @@
 # lfxSpeed
 <p align="right"><br><a href="README.md">English</a> | <a href="README.zh_CN.md">简体中文</a> | <a href="README.zh_TW.md">繁體中文</a></p>
-
-一款轻巧、快速的网速插件。
+一款轻巧、快速的网速插件。（**建议使用重构版本：[lfxNet](https://github.com/xmuli/lfxNet)** ）
 
 <img src="images/lfxSpeed.gif" alt="lfxSpeed" width="70%;" />
 
