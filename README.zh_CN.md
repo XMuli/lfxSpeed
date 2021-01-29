@@ -1,5 +1,12 @@
 # lfxSpeed
 <p align="right"><br><a href="README.md">English</a> | <a href="README.zh_CN.md">简体中文</a> | <a href="README.zh_TW.md">繁體中文</a></p>
+
+ ![](https://img.shields.io/badge/language-c++-orange.svg) ![](https://img.shields.io/badge/language-Qt-orange.svg) ![](https://img.shields.io/github/license/xmuli/lfxSpeed) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/xmuli/lfxSpeed)  
+
+ ![GitHub All Releases](https://img.shields.io/github/downloads/xmuli/lfxSpeed/total)  ![GitHub stars](https://img.shields.io/github/stars/xmuli/lfxSpeed?style=social) ![GitHub forks](https://img.shields.io/github/forks/xmuli/lfxSpeed?style=social) 
+
+<br>
+
 一款轻巧、快速的网速插件。（**建议使用重构版本：[lfxNet](https://github.com/xmuli/lfxNet)** ）
 
 <img src="images/lfxSpeed.gif" alt="lfxSpeed" width="70%;" />
@@ -11,8 +18,9 @@
 - [背景](#背景)
 - [编译](#编译)
 - [卸载](#卸载)
-- [维护者](#维护者)
-- [许可协议](#许可协议)
+- [作者](#作者)
+- [其它](#其它)
+- [协议](#协议)
 
 <br>
 
@@ -57,19 +65,23 @@ sudo rm -rf /usr/lib/dde-dock/plugins/liblfxSpeed.so
 
 <br>
 
-### 维护者
+### 作者
 
-[@偕臧](https://github.com/xmuli)
+[偕臧](https://github.com/xmuli)
 
 <br>
 
-### 其它：
+### 其它
 
 此项目不再维护；但基于其思路和新的实现目标，源码将会重新设计实现，一个功能更加强大的网速插件，也会提供对应的库便于后来者二次开发，新的项目在 [lfxNet](https://github.com/xmuli/lfxNet) ，芜湖～
 
 <br>
 
-### 许可协议
+### 协议
 
-![](https://img.shields.io/github/license/xmuli/lfxSpeed) [MIT](LICENSE) © xmuli <偕臧>
+<img src="images/MIT.png" alt="MIT" width="15%">
+
+该项目基于 `MIT` 协议进行分发和使用。 有关更多信息，请参阅 [协议文件](/LICENSE)。
+
+
 

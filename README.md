@@ -1,6 +1,12 @@
 # lfxSpeed
 <p align="right"><br><a href="README.md">English</a> | <a href="README.zh_CN.md">简体中文</a> | <a href="README.zh_TW.md">繁體中文</a></p>
 
+ ![](https://img.shields.io/badge/language-c++-orange.svg) ![](https://img.shields.io/badge/language-Qt-orange.svg) ![](https://img.shields.io/github/license/xmuli/lfxSpeed) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/xmuli/lfxSpeed)  
+
+ ![GitHub All Releases](https://img.shields.io/github/downloads/xmuli/lfxSpeed/total)  ![GitHub stars](https://img.shields.io/github/stars/xmuli/lfxSpeed?style=social) ![GitHub forks](https://img.shields.io/github/forks/xmuli/lfxSpeed?style=social) 
+
+<br>
+
 A lightweight and fast Internet speed plugin. （**Recommended refactored version: [lfxNet](https://github.com/xmuli/lfxNet)** ）
 
 <img src="images/lfxSpeed.gif" alt="lfxSpeed" width="70%;" />
@@ -12,7 +18,8 @@ A lightweight and fast Internet speed plugin. （**Recommended refactored versio
 - [background](#background)
 - [Compile](#Compile)
 - [Uninstall](#Uninstall)
-- [Maintainer](#Maintainer)
+- [Author](#Author)
+- [Other](#Other)
 - [License](#License)
 
 <br>
@@ -58,13 +65,13 @@ sudo rm -rf /usr/lib/dde-dock/plugins/liblfxSpeed.so
 
 <br>
 
-### Maintainer
+### Author
 
-[@偕臧](https://github.com/xmuli)
+[偕臧](https://github.com/xmuli)
 
 <br>
 
-### Other.
+### Other
 
 This project is no longer maintained; but based on its ideas and new implementation goals, the source code will be redesigned to achieve a more powerful network speed plug-in, will also provide the corresponding library to facilitate the secondary development of later, the new project in [lfxNet](https://github.com/xmuli/lfxNet), Wuhu ~
 
@@ -72,4 +79,6 @@ This project is no longer maintained; but based on its ideas and new implementat
 
 ### License 
 
-![](https://img.shields.io/github/license/xmuli/lfxSpeed) [MIT](LICENSE) © xmuli <偕臧>
+<img src="images/MIT.png" alt="MIT" width="15%">
+
+This project is distributed and used based on the `MIT` protocol. For more information, see [LICENSE ](/LICENSE).
