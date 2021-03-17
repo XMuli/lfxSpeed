@@ -7,7 +7,7 @@
 
 <br>
 
-一款輕巧、快速的網速外掛程式。（**建议使用重构版本：[lfxNet](https://github.com/xmuli/lfxNet)** ）
+一款輕巧、快速的網速外掛程式。（**建议使用重构版本：[NetSpeed](https://github.com/xmuli/NetSpeed)** ）
 
 <img src="images/lfxSpeed.gif" alt="lfxSpeed" width="70%;" />
 
@@ -52,7 +52,7 @@ sudo make install
 
 **注意：** 若未生效，可執行 `killall dde-dock` 重啟任務欄後生效
 
-**開發文檔：**  [Deepin 開發任務欄網速外掛程式 lfxSpeed](https://xmuli.tech/posts/c225b552/) or [link](https://xmuli.blog.csdn.net/article/details/110672252)
+**開發文檔：**  [ifmet.cn](https://ifmet.cn/posts/c225b552)  or [link](https://xmuli.blog.csdn.net/article/details/110672252)
 
 <br>
 
@@ -74,7 +74,7 @@ sudo rm -rf /usr/lib/dde-dock/plugins/liblfxSpeed.so
 
 ### 其它：
 
-此項目不再維護；但基于其思路和新的實現目標，源碼將會重新設計實現，一個功能更加強大的網速外掛程式，也會提供對應的庫便于後來者二次開發，新的項目在 [lfxNet](https://github.com/xmuli/lfxNet) ，蕪湖～
+此項目不再維護；但基于其思路和新的實現目標，源碼將會重新設計實現，一個功能更加強大的網速外掛程式，也會提供對應的庫便于後來者二次開發，新的項目在 [NetSpeed](https://github.com/xmuli/NetSpeed) ，蕪湖～
 
 <br>
 

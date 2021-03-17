@@ -7,7 +7,7 @@
 
 <br>
 
-A lightweight and fast Internet speed plugin. （**Recommended refactored version: [lfxNet](https://github.com/xmuli/lfxNet)** ）
+A lightweight and fast Internet speed plugin. （**Recommended refactored version: [NetSpeed](https://github.com/xmuli/NetSpeed)** ）
 
 <img src="images/lfxSpeed.gif" alt="lfxSpeed" width="70%;" />
 
@@ -51,7 +51,7 @@ Or just use `IDE` to click the build button (not the run button) and copy the sh
 
 **Note:** If it doesn't take effect, you can execute `killall dde-dock` to restart the taskbar and it will take effect
 
-**Development Documentation:** [Deepin Development Taskbar Internet Speed Plugin lfxSpeed](https://xmuli.tech/posts/c225b552/) or [link](https://xmuli.blog.csdn.net/article/details/110672252)
+**Development Documentation:** [ifmet.cn](https://ifmet.cn/posts/c225b552) or [link](https://xmuli.blog.csdn.net/article/details/110672252)
 
 <br>
 
@@ -73,7 +73,7 @@ sudo rm -rf /usr/lib/dde-dock/plugins/liblfxSpeed.so
 
 ### Other
 
-This project is no longer maintained; but based on its ideas and new implementation goals, the source code will be redesigned to achieve a more powerful network speed plug-in, will also provide the corresponding library to facilitate the secondary development of later, the new project in [lfxNet](https://github.com/xmuli/lfxNet), Wuhu ~
+This project is no longer maintained; but based on its ideas and new implementation goals, the source code will be redesigned to achieve a more powerful network speed plug-in, will also provide the corresponding library to facilitate the secondary development of later, the new project in [NetSpeed](https://github.com/xmuli/NetSpeed), Wuhu ~
 
 <br>
 

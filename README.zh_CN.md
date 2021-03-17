@@ -7,7 +7,7 @@
 
 <br>
 
-一款轻巧、快速的网速插件。（**建议使用重构版本：[lfxNet](https://github.com/xmuli/lfxNet)** ）
+一款轻巧、快速的网速插件。（**建议使用重构版本：[NetSpeed](https://github.com/xmuli/NetSpeed)** ）
 
 <img src="images/lfxSpeed.gif" alt="lfxSpeed" width="70%;" />
 
@@ -51,7 +51,7 @@ sudo make install
 
 **注意：** 若未生效，可执行 `killall dde-dock` 重启任务栏后生效
 
-**开发文档：**  [Deepin 开发任务栏网速插件 lfxSpeed](https://xmuli.tech/posts/c225b552/) or [link](https://xmuli.blog.csdn.net/article/details/110672252)
+**开发文档：**   [ifmet.cn](https://ifmet.cn/posts/c225b552) or [link](https://xmuli.blog.csdn.net/article/details/110672252)
 
 <br>
 
@@ -73,7 +73,7 @@ sudo rm -rf /usr/lib/dde-dock/plugins/liblfxSpeed.so
 
 ### 其它
 
-此项目不再维护；但基于其思路和新的实现目标，源码将会重新设计实现，一个功能更加强大的网速插件，也会提供对应的库便于后来者二次开发，新的项目在 [lfxNet](https://github.com/xmuli/lfxNet) ，芜湖～
+此项目不再维护；但基于其思路和新的实现目标，源码将会重新设计实现，一个功能更加强大的网速插件，也会提供对应的库便于后来者二次开发，新的项目在 [NetSpeed](https://github.com/xmuli/NetSpeed) ，芜湖～
 
 <br>
 
