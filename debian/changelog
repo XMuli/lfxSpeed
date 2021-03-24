@@ -1,0 +1,7 @@
+lfxspeed (0.6.2-2) stable; urgency=medium
+
+  * 修复：网速单位跳动，未固定宽度
+  * 修复：支持暗色模式为白色字体
+  * 更新：更新版本， 替换 LOGO
+
+ -- xmuli tech <xmulitech@gmail.com>  Wed, 24 Mar 2021 15:57:49 +0800
