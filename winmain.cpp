@@ -92,7 +92,7 @@ void WinMain::init()
     m_lineDown->setText(tr("↓:"));
     gridShowText->addWidget(m_lineDown, 1, 1);
     gridShowText->addWidget(new DLabel(tr("CPU:")), 0, 2);
-    m_lineCpu->setText(tr("#CPU:"));
+    m_lineCpu->setText(tr("CPU:"));
     gridShowText->addWidget(m_lineCpu, 0, 3);
     gridShowText->addWidget(new DLabel(tr("内存:")), 1, 2);
     m_lineMemory->setText(tr(" MEM:"));

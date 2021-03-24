@@ -28,9 +28,8 @@
 #include <QFont>
 
 #include <DLabel>
+#include <DGuiApplicationHelper>
 #include "settingmodel.h"
-
-#include <libdtk-5.4.0/DGui/DGuiApplicationHelper>
 
 DWIDGET_USE_NAMESPACE
 
