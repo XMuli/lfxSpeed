@@ -39,10 +39,9 @@ public:
     SpeedWidget(SettingModel *model, QWidget *parent = nullptr);
 
     void init();
-//    virtual QSize sizeHint() const override;
-//    void resizeEvent(QResizeEvent *event);
-//    virtual void paintEvent(QPaintEvent *event) override;
     QString m_runTime;
+//    QString getLabCpuText();
+//    QString getLabMemText();
 
 public slots:
     void onUpdateNet();
@@ -52,7 +51,6 @@ public slots:
     void onSetLabDown(const QString down);
     void onSetLabCpu(const QString cpu);
     void onSetLabMemory(const QString memory);
-    void onUpAndDown(Qt::CheckState check);
     void onDecimalsNum(const int num);
     void onUpdateInterval(const int ms);
     void onSensitive(const int index);
@@ -76,8 +74,6 @@ private:
     DLabel *m_numDown;
     DLabel *m_numCpu;
     DLabel *m_numMemory;
-    DLabel *m_diskRead;
-    DLabel *m_diskWrite;
     QTimer *m_timer;
     int m_DecimalsNum;
     SpeedInfo::Sensitive m_Sensitive;

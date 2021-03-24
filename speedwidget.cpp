@@ -25,9 +25,12 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include <QFont>
 
 #include <DLabel>
 #include "settingmodel.h"
+
+#include <libdtk-5.4.0/DGui/DGuiApplicationHelper>
 
 DWIDGET_USE_NAMESPACE
 
@@ -41,10 +44,8 @@ SpeedWidget::SpeedWidget(SettingModel *model, QWidget *parent)
     , m_numDown(nullptr)
     , m_numCpu(nullptr)
     , m_numMemory(nullptr)
-    , m_diskRead(nullptr)
-    , m_diskWrite(nullptr)
     , m_timer(new QTimer(this))
-    , m_DecimalsNum(2)
+    , m_DecimalsNum(0)
     , m_Sensitive(SpeedInfo::Default)
     , m_info(nullptr)
     , m_down(0)
@@ -87,9 +88,9 @@ void SpeedWidget::init()
     m_labUpload->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
     m_labDown = new DLabel(m_model->getStrDown());
     m_labDown->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    m_labCpu = new DLabel(m_model->getStrCpu());
+    m_labCpu = new DLabel(" CPU:");
     m_labCpu->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    m_labMemory = new DLabel(m_model->getStrMemory());
+    m_labMemory = new DLabel(" MEM:");
     m_labMemory->setAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
     m_numUpload = new DLabel(tr("0 Kb/s"));
@@ -100,28 +101,59 @@ void SpeedWidget::init()
     m_numCpu->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
     m_numMemory = new DLabel(tr("0 %"));
     m_numMemory->setAlignment(Qt::AlignRight | Qt::AlignVCenter);
-//    m_diskRead = new DLabel(tr("↗: 0 kb/s"));
-//    m_diskWrite = new DLabel(tr("↙: 0 kb/s"));
+
+    QFont font("Noto Sans Mono CJK SC", 9);
+    QPalette palette;
+
+    // 切换系统主题之后，需要重启 dde-dock 才能生效
+    DGuiApplicationHelper *guiAppHelp = DGuiApplicationHelper::instance();
+    if (guiAppHelp->themeType() == DGuiApplicationHelper::ColorType::DarkType)
+        palette.setColor(QPalette::WindowText,Qt::white);
+    else
+        palette.setColor(QPalette::WindowText,Qt::black);
+
+    m_labUpload->setFont(font);
+    m_labDown->setFont(font);
+    m_labCpu->setFont(font);
+    m_labMemory->setFont(font);
+    m_numUpload->setFont(font);
+    m_numDown->setFont(font);
+    m_numCpu->setFont(font);
+    m_numMemory->setFont(font);
+
+    m_labUpload->setPalette(palette);
+    m_labDown->setPalette(palette);
+    m_labCpu->setPalette(palette);
+    m_labMemory->setPalette(palette);
+    m_numUpload->setPalette(palette);
+    m_numDown->setPalette(palette);
+    m_numCpu->setPalette(palette);
+    m_numMemory->setPalette(palette);
 
     QVBoxLayout *VLayout1 = new QVBoxLayout();
     VLayout1->setContentsMargins(0, 0, 0, 0);
+    VLayout1->setSpacing(0);
     VLayout1->addWidget(m_labUpload);
     VLayout1->addWidget(m_labDown);
     QVBoxLayout *VLayout2 = new QVBoxLayout();
     VLayout2->setContentsMargins(0, 0, 0, 0);
+    VLayout2->setSpacing(0);
     VLayout2->addWidget(m_numUpload);
     VLayout2->addWidget(m_numDown);
     QVBoxLayout *VLayout3 = new QVBoxLayout();
     VLayout3->setContentsMargins(0, 0, 0, 0);
+    VLayout3->setSpacing(0);
     VLayout3->addWidget(m_labCpu);
     VLayout3->addWidget(m_labMemory);
     QVBoxLayout *VLayout4 = new QVBoxLayout();
     VLayout4->setContentsMargins(0, 0, 0, 0);
+    VLayout4->setSpacing(0);
     VLayout4->addWidget(m_numCpu);
     VLayout4->addWidget(m_numMemory);
 
     QHBoxLayout *hLayout = new QHBoxLayout();
     hLayout->setContentsMargins(0, 0, 0, 0);
+    hLayout->setSpacing(0);
     hLayout->addLayout(VLayout1);
     hLayout->addLayout(VLayout2);
     hLayout->addLayout(VLayout3);
@@ -130,37 +162,6 @@ void SpeedWidget::init()
 
     layout = new QGridLayout();
     layout->setContentsMargins(0, 0, 0, 0);
-//    QVBoxLayout *VLayout = new QVBoxLayout();
-
-//    QHBoxLayout *hLayout2 = new QHBoxLayout();
-//    VLayout->setContentsMargins(0, 0, 0, 0);
-//    hLayout1->setContentsMargins(0, 0, 0, 0);
-//    hLayout2->setContentsMargins(0, 0, 0, 0);
-//    hLayout1->addWidget(m_labUpload);
-//    hLayout1->addWidget(m_numUpload);
-//    hLayout1->addWidget(m_labCpu);
-//    hLayout1->addWidget(m_numCpu);
-//    hLayout2->addWidget(m_labDown);
-//    hLayout2->addWidget(m_numDown);
-//    hLayout2->addWidget(m_labMemory);
-//    hLayout2->addWidget(m_numMemory);
-
-
-//    VLayout->addLayout(hLayout1);
-//    VLayout->addLayout(hLayout2);
-//    setLayout(VLayout);
-//    layout->addWidget(m_labUpload, 0, 0);
-//    layout->addWidget(m_numUpload, 0, 1);
-//    layout->addWidget(m_labDown, 1, 0);
-//    layout->addWidget(m_numDown, 1, 1);
-//    layout->addWidget(m_labCpu, 0, 2);
-//    layout->addWidget(m_numCpu, 0, 3);
-//    layout->addWidget(m_labMemory, 1, 2);
-//    layout->addWidget(m_numMemory, 1, 3);
-//    layout->addWidget(m_diskRead, 0, 2);
-//    layout->addWidget(m_diskWrite, 1, 2);
-
-//    qDebug()<<"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!+>"<<layout<<layout->children();
 
     m_info = new SpeedInfo(this);
     m_info->netRate(m_down, m_upload);
@@ -173,23 +174,6 @@ void SpeedWidget::init()
     m_timer->setInterval(1000);
     m_timer->start();
 }
-
-//void SpeedWidget::resizeEvent(QResizeEvent *event)
-//{
-//    Q_UNUSED(event)
-
-//    qDebug()<<"###########################################"<<m_labUpload->text();
-//    setFixedWidth(fontMetrics().width(m_labUpload->text() + m_numUpload->text() + m_labCpu->text() + m_numCpu->text()));
-//}
-
-//void SpeedWidget::paintEvent(QPaintEvent *event)
-//{
-//    Q_UNUSED(event)
-//    QPainter pa(this);
-//    pa.setPen(QPen(Qt::red));
-//    pa.drawRect(rect());
-//    qDebug()<<"-----------#######->"<<rect();
-//}
 
 void SpeedWidget::onUpdateNet()
 {
@@ -205,8 +189,8 @@ void SpeedWidget::onUpdateNet()
     unit = SpeedInfo::RateByte;
     uploadRate = m_info->autoRateUnits((upload - m_upload) / (m_timer->interval() / 1000), unit);
     QString uploadUnit = m_info->setRateUnitSensitive(unit, m_Sensitive);
-    m_numDown->setText(QString("%1").arg(downRate, 0, 'f', m_DecimalsNum, QLatin1Char(' ')) + downUnit);
-    m_numUpload->setText(QString("%1").arg(uploadRate, 0, 'f', m_DecimalsNum, QLatin1Char(' ')) + uploadUnit);
+    m_numDown->setText(QString("%1").arg(downRate, 3, 'f', m_DecimalsNum, QLatin1Char(' ')) + downUnit);
+    m_numUpload->setText(QString("%1").arg(uploadRate, 3, 'f', m_DecimalsNum, QLatin1Char(' ')) + uploadUnit);
 
     m_down = down;
     m_upload = upload;
@@ -217,7 +201,7 @@ void SpeedWidget::onUpdateCpu()
     long cpuAll = 0;
     long cpuFree = 0;
     m_info->cpuRate(cpuAll, cpuFree);
-    m_numCpu->setText(QString("%1%").arg((((cpuAll - m_cpuAll) - (cpuFree - m_cpuFree)) * 100.0 / (cpuAll - m_cpuAll)), 0, 'f', m_DecimalsNum, QLatin1Char(' ')));
+    m_numCpu->setText(QString("%1%").arg((((cpuAll - m_cpuAll) - (cpuFree - m_cpuFree)) * 100.0 / (cpuAll - m_cpuAll)), 2, 'f', m_DecimalsNum, QLatin1Char(' ')));
 
     m_cpuAll = cpuAll;
     m_cpuFree = cpuFree;
@@ -231,7 +215,7 @@ void SpeedWidget::onUpdateMemory()
     long swapAll = 0;
 
     m_info->memoryRate(memory, memoryAll, swap, swapAll);
-    m_numMemory->setText(QString("%1%").arg(memory * 100.0 / memoryAll, 0, 'f', m_DecimalsNum, QLatin1Char(' ')));
+    m_numMemory->setText(QString("%1%").arg(memory * 100.0 / memoryAll, 2, 'f', m_DecimalsNum, QLatin1Char(' ')));
 }
 
 void SpeedWidget::onSetLabUpload(const QString upload)
@@ -252,12 +236,6 @@ void SpeedWidget::onSetLabCpu(const QString cpu)
 void SpeedWidget::onSetLabMemory(const QString memory)
 {
     m_labMemory->setText(memory);
-}
-
-void SpeedWidget::onUpAndDown(Qt::CheckState check)
-{
-//    if (check == Qt::Checked)
-    // TODO: 上传核下载互相换位置
 }
 
 void SpeedWidget::onDecimalsNum(const int num)
@@ -284,13 +262,9 @@ void SpeedWidget::onSensitive(const int index)
 void SpeedWidget::onShowUp(int status)
 {
     if (checkToBool(status)) {
-//        layout->addWidget(m_labUpload, 0, 0);
-//        layout->addWidget(m_numUpload, 0, 1);
         m_labUpload->show();
         m_numUpload->show();
     } else {
-//        layout->removeWidget(m_labUpload);
-//        layout->removeWidget(m_numUpload);
         m_labUpload->hide();
         m_numUpload->hide();
     }
@@ -303,13 +277,9 @@ void SpeedWidget::onShowUp(int status)
 void SpeedWidget::onShowDown(int status)
 {
     if (checkToBool(status)) {
-//        layout->addWidget(m_labDown, 1, 0);
-//        layout->addWidget(m_numDown, 1, 1);
         m_labDown->show();
         m_numDown->show();
     } else {
-//        layout->removeWidget(m_labDown);
-//        layout->removeWidget(m_numDown);
         m_labDown->hide();
         m_numDown->hide();
     }
@@ -318,13 +288,9 @@ void SpeedWidget::onShowDown(int status)
 void SpeedWidget::onShowCPU(int status)
 {
     if (checkToBool(status)) {
-//        layout->addWidget(m_labCpu, 0, 2);
-//        layout->addWidget(m_numCpu, 0, 3);
         m_labCpu->show();
         m_numCpu->show();
     } else {
-//        layout->removeWidget(m_labCpu);
-//        layout->removeWidget(m_numCpu);
         m_labCpu->hide();
         m_numCpu->hide();
     }
@@ -338,13 +304,9 @@ void SpeedWidget::onShowMem(int status)
 
 
     if (checkToBool(status)) {
-//        layout->addWidget(m_labMemory, 1, 2);
-//        layout->addWidget(m_numMemory, 1, 3);
         m_labMemory->show();
         m_numMemory->show();
     } else {
-//        layout->removeWidget(m_labMemory);
-//        layout->removeWidget(m_numMemory);
         m_labMemory->hide();
         m_numMemory->hide();
     }

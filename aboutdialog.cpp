@@ -33,11 +33,11 @@ AboutDialog::AboutDialog(QWidget *parent)
 void AboutDialog::init()
 {
     setTitle(tr("lfxSpeed"));
-    setMessage(tr("A light and fast Internet speed plugin."));
+    setMessage(tr("A light and fast Network speed plugin(DDE)."));
 
     QVBoxLayout* mainLayout = static_cast<QVBoxLayout *>(layout());
     DLabel *labLogo = new DLabel();
-    labLogo->setPixmap(QPixmap(":/images/about.jpg"));
+    labLogo->setPixmap(QPixmap(":/images/lfxSpeed.svg"));
     labLogo->resize(200, 200);
     mainLayout->insertWidget(1, labLogo, 0, Qt::AlignCenter);
 
@@ -45,8 +45,8 @@ void AboutDialog::init()
     QVBoxLayout *vLayout = new QVBoxLayout(content);
     vLayout->setContentsMargins(0, 0, 0, 0);
     vLayout->addSpacing(15);
-    DLabel *labVersion = new DLabel(tr("Version: 0.6.1  2020/12/28"));
-    DLabel *labCopyright = new DLabel(tr("Copyright (c) 2020 By 偕臧"));
+    DLabel *labVersion = new DLabel(tr("Version: 0.6.2  2021/03/24"));
+    DLabel *labCopyright = new DLabel(tr("Copyright (c) 2020 By ifmet.cn"));
     vLayout->addWidget(labVersion, 0, Qt::AlignCenter);
     vLayout->addWidget(labCopyright, 0, Qt::AlignCenter);
     vLayout->addSpacing(15);
@@ -67,7 +67,7 @@ void AboutDialog::init()
     labDonation->setText(tr("<a href=\"\">Donation"));
     DLabel *labAcknowledgements = new DLabel();
     labAcknowledgements->setOpenExternalLinks(true);
-    labAcknowledgements->setText(tr("<a href=\"\">Thanks"));
+    labAcknowledgements->setText(tr("<a href=https://github.com/justforlxz\">Thanks"));
     hLayout->addWidget(labAuthor);
     hLayout->addWidget(labGithub);
     hLayout->addWidget(labLicense);

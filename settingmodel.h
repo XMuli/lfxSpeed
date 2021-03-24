@@ -55,7 +55,6 @@ signals:
     void sigDownChange(QString upload);
     void sigCpuChange(QString upload);
     void sigMenoryChange(QString upload);
-//    void sigUpAndDownChange(Qt::CheckState check);
     void sigDecimalsNumChange(const int num);
     void sigIntervalChange(const int ms);
     void sigSensitiveChange(const int index);

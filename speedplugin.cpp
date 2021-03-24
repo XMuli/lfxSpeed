@@ -42,8 +42,8 @@ SpeedPlugin::SpeedPlugin(QObject *parent)
 
 const QString SpeedPlugin::pluginName() const
 {
-//    return QString("lfxSpeed");
-    return "datetime";  // 假装我也叫这个，否则会被压缩，在 1.2.3 版本中才被修改
+//    return QString("lfxSpeed");  datetime
+    return "lfxSpeed";  // 假装我也叫这个，否则会被压缩，在 1.2.3 版本中才被修改
 }
 
 void SpeedPlugin::init(PluginProxyInterface *proxyInter)

@@ -26,10 +26,10 @@ SettingModel::SettingModel(QObject *parent)
     , m_strUpload("↑:")
     , m_strDown("↓:")
     , m_strCpu("CPU:")
-    , m_strMemory("内存:")
+    , m_strMemory("MEM:")
     , m_bUpAndDown(true)
     , m_bMouseTips(true)
-    , m_nDecimalsNum(2)
+    , m_nDecimalsNum(0)
     , m_nInterval(1000)
 {
 }

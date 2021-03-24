@@ -66,7 +66,6 @@ WinMain::WinMain(SettingModel *model, QWidget *parent)
     connect(m_checkShowCPU, &DCheckBox::stateChanged, this, &WinMain::sigShowCPU);
     connect(m_checkShowMem, &DCheckBox::stateChanged, this, &WinMain::sigShowMem);
     connect(m_checkMouseTips, &DCheckBox::stateChanged, this, &WinMain::sigMousTip);
-    //    connect(m_checkUpAndDown, &DCheckBox::checkState, this, &WinMain::sigUpAndDown);
 
     connect(this, &WinMain::sigLabUpload, m_model, &SettingModel::sigUploadChange);
     connect(this, &WinMain::sigLabDown, m_model, &SettingModel::sigDownChange);
@@ -79,15 +78,10 @@ WinMain::WinMain(SettingModel *model, QWidget *parent)
     connect(this, &WinMain::sigShowDown, m_model, &SettingModel::sigShowDownChange);
     connect(this, &WinMain::sigShowCPU, m_model, &SettingModel::sigShowCPUChange);
     connect(this, &WinMain::sigShowMem, m_model, &SettingModel::sigShowMemChange);
-//    connect(this, &WinMain::sigUpAndDown, m_model, &SettingModel::sigUpAndDownChange); 槽函数还未实现
 }
 
 void WinMain::init()
 {
-
-    // 主窗口设置  --------------------------------------------
-    DWidget *settingMain = new QWidget();
-
     // 任务栏窗口设置  --------------------------------------------
     QGroupBox* boxShowText = new QGroupBox(tr("显示文本:"));
     QGridLayout* gridShowText = new QGridLayout();
@@ -98,10 +92,10 @@ void WinMain::init()
     m_lineDown->setText(tr("↓:"));
     gridShowText->addWidget(m_lineDown, 1, 1);
     gridShowText->addWidget(new DLabel(tr("CPU:")), 0, 2);
-    m_lineCpu->setText(tr("CPU:"));
+    m_lineCpu->setText(tr("#CPU:"));
     gridShowText->addWidget(m_lineCpu, 0, 3);
     gridShowText->addWidget(new DLabel(tr("内存:")), 1, 2);
-    m_lineMemory->setText(tr("MEM:"));
+    m_lineMemory->setText(tr(" MEM:"));
     gridShowText->addWidget(m_lineMemory, 1, 3);
 
     QSpacerItem *vSpacer = new QSpacerItem(1, 1, QSizePolicy::Maximum, QSizePolicy::Maximum);
@@ -109,7 +103,7 @@ void WinMain::init()
 
     gridShowText->addWidget(new DLabel(tr("小数精确度:")), 3, 0);
     m_spinDecimalsNum->setMinimum(0);
-    m_spinDecimalsNum->setValue(2);
+    m_spinDecimalsNum->setValue(0);
     m_spinDecimalsNum->setSingleStep(1);
     gridShowText->addWidget(m_spinDecimalsNum, 3, 1);
     gridShowText->addWidget(new DLabel(tr("刷新时隔:")), 3, 2);
@@ -144,7 +138,6 @@ void WinMain::init()
     gridCheck->addWidget(m_checkMouseTips, 1, 0);
     m_checkUpAndDown->setCheckState(Qt::Unchecked);
     m_checkUpAndDown->setText(tr("上传下载互换"));
-//    gridCheck->addWidget(m_checkUpAndDown, 1, 1);
 
     QVBoxLayout* vLayout = new QVBoxLayout(boxShowText);
     vLayout->addLayout(gridShowText, 0);
@@ -155,10 +148,6 @@ void WinMain::init()
     hLayoutDock->addWidget(boxShowText);
 
     // 常规设置 --------------------------------------------
-    DWidget *settingOther = new QWidget();
-
-//    m_tab->addTab(settingMain, tr("主窗口设置"));
     m_tab->addTab(settingDock, tr("任务栏窗口设置"));
-//    m_tab->addTab(settingOther, tr("常规设置"));
     setCentralWidget(m_tab);
 }
