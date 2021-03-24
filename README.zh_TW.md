@@ -19,6 +19,7 @@
 - [背景](#背景)
 - [編譯](#編譯)
 - [卸載](#卸載)
+- [更新 2021-03-24](#更新 2021-03-24)
 - [作者](#作者)
 - [其它](#其它)
 - [協議](#協議)
@@ -63,6 +64,25 @@ sudo make install
 ```bash
 sudo rm -rf /usr/lib/dde-dock/plugins/liblfxSpeed.so
 ```
+<br>
+
+### 更新 2021-03-24
+
+下載地址： [v0.6.2](https://github.com/xmuli/lfxSpeed/releases/tag/v0.6.2) 
+
+安裝之後建議點擊一下 “刷新” 生效，切換主題要重啟 dde-dock 生效，emmm，再應該沒啥人來報告缺陷了吧。
+
+**修復缺陷**
+
+- 網速單位固定寬度，不再跳動
+- 使用等寬字體，默認大小為 8
+- 更新版本， 替換 LOGO
+- 支持暗色模式為白色字體；白色主題為暗色字體
+
+<br>
+
+<img src="https://cdn.jsdelivr.net/gh/xmuli/xmuliPic@pic/2021/Peek%202021-03-24%2016-54.gif" width="55%"/> <img src="https://cdn.jsdelivr.net/gh/xmuli/xmuliPic@pic/2021/20210324_165816.png" width="40%"/>
+
 <br>
 
 

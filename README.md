@@ -18,6 +18,7 @@ A lightweight and fast Internet speed plugin. （**Recommended refactored versio
 - [background](#background)
 - [Compile](#Compile)
 - [Uninstall](#Uninstall)
+- [Updated 2021-03-24][#Updated 2021-03-24]
 - [Author](#Author)
 - [Other](#Other)
 - [License](#License)
@@ -62,6 +63,27 @@ Execute the following in any path.
 ```bash
 sudo rm -rf /usr/lib/dde-dock/plugins/liblfxSpeed.so
 ```
+
+<br>
+
+### Updated 2021-03-24
+
+Downloaded from: [v0.6.2](https://github.com/xmuli/lfxSpeed/releases/tag/v0.6.2) 
+
+After installation, it is recommended to click "Refresh" to take effect, switch theme to restart dde-dock to take effect, emm, then there should not be much to report defects.
+
+
+
+**Fix the defects**
+
+- Internet speed unit fixed width, no longer jumping
+- Use equal-width font, the default size of 8
+- Update version, replace LOGO
+- Support dark mode for white font; white theme for dark font
+
+<br>
+
+<img src="https://cdn.jsdelivr.net/gh/xmuli/xmuliPic@pic/2021/Peek%202021-03-24%2016-54.gif" width="55%"/> <img src="https://cdn.jsdelivr.net/gh/xmuli/xmuliPic@pic/2021/20210324_165816.png" width="40%"/>
 
 <br>
 
