@@ -1,4 +1,4 @@
-Source: lfxspeed
+Source: com.github.lfxspeed
 Section: unknown
 Priority: optional
 Maintainer: xmuli tech <xmulitech@gmail.com>
@@ -13,7 +13,7 @@ Homepage: https://github.com/xmuli/lfxSpeed
 #Vcs-Browser: https://salsa.debian.org/debian/lfxspeed
 #Vcs-Git: https://salsa.debian.org/debian/lfxspeed.git
 
-Package: lfxspeed
+Package: com.github.lfxspeed
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: A lightweight and fast Internet speed plugin
