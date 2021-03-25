@@ -33,7 +33,7 @@ AboutDialog::AboutDialog(QWidget *parent)
 void AboutDialog::init()
 {
     setTitle(tr("lfxSpeed"));
-    setMessage(tr("A light and fast Network speed plugin(DDE)."));
+    setMessage(tr("A light and fast network speed plugin(DDE)."));
 
     QVBoxLayout* mainLayout = static_cast<QVBoxLayout *>(layout());
     DLabel *labLogo = new DLabel();
@@ -45,7 +45,7 @@ void AboutDialog::init()
     QVBoxLayout *vLayout = new QVBoxLayout(content);
     vLayout->setContentsMargins(0, 0, 0, 0);
     vLayout->addSpacing(15);
-    DLabel *labVersion = new DLabel(tr("Version: 0.6.3  2021/03/24"));
+    DLabel *labVersion = new DLabel(tr("Version: 0.6.4  2021/03/25"));
     DLabel *labCopyright = new DLabel(tr("Copyright (c) 2021 By ifmet.cn"));
     vLayout->addWidget(labVersion, 0, Qt::AlignCenter);
     vLayout->addWidget(labCopyright, 0, Qt::AlignCenter);

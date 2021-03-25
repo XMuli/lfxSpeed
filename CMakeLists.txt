@@ -27,6 +27,7 @@ file(GLOB_RECURSE SRCS "*.h" "*.cpp" "*.json")
 # <库名>_INCLUDE_DIRS   有哪些头文件目录（Qt5Widgets_INCLUDE_DIRS）
 # <库名>_LIBRARIES      有哪些库文件（Qt5Widgets_LIBRARIES）
 find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Network REQUIRED)
 find_package(DtkWidget REQUIRED)
 
 # find_package 命令还可以用来加载 cmake 的功能模块
@@ -77,6 +78,7 @@ set_target_properties(${PLUGIN_NAME} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ./)
 # 当出现编译失败提示找不到某些库的头文件时应该检查此处是否将所有需要的头文件都包含了
 target_include_directories(${PLUGIN_NAME} PUBLIC
     ${Qt5Widgets_INCLUDE_DIRS}
+    ${Qt5Network_INCLUDE_DIRS}
     ${DtkWidget_INCLUDE_DIRS}
     ${DdeDockInterface_INCLUDE_DIRS}
 )
@@ -86,6 +88,7 @@ target_include_directories(${PLUGIN_NAME} PUBLIC
 # 当出现运行时错误提示某些符号没有定义时应该检查此处是否将所有用的库都写在了这里
 target_link_libraries(${PLUGIN_NAME} PRIVATE
     ${Qt5Widgets_LIBRARIES}
+    ${Qt5Network_LIBRARIES}
     ${DtkWidget_LIBRARIES}
     ${DdeDockInterface_LIBRARIES}
 )

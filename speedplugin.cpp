@@ -160,9 +160,13 @@ QWidget *SpeedPlugin::itemTipsWidget(const QString &itemKey)
         return nullptr;
 }
 
+/*!
+ * \brief SpeedPlugin::onUpdateTip 悬浮消息预览
+ */
 void SpeedPlugin::onUpdateTip()
 {
-    m_labTip.setText(m_speedWidget->m_runTime);
+    m_labTip.setText(m_speedWidget->networkInfo()
+                     + m_speedWidget->m_runTime);
 }
 
 void SpeedPlugin::onMouseTip(int status)

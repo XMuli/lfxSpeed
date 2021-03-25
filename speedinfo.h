@@ -47,8 +47,6 @@ public:
 public:
     SpeedInfo(QObject *parent = nullptr);
 
-    bool systemTime(QString &startup, QString &free);
-    bool diskRate(long &read, long &write);
     void netRate(long &netDown, long &netUpload);
     void cpuRate(long &cpuAll, long &cpuFree);
     void memoryRate(long &memory, long &memoryAll, long &swap, long &swapAll);

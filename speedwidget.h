@@ -40,6 +40,7 @@ public:
 
     void init();
     QString m_runTime;
+    QString networkInfo();
 //    QString getLabCpuText();
 //    QString getLabMemText();
 

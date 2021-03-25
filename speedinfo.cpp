@@ -294,5 +294,3 @@ QString SpeedInfo::autoTimeUnits(double s)
 
     return runTime;
 }
-
-

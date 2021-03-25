@@ -26,6 +26,8 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QFont>
+#include <QNetworkInterface>
+#include <QMessageBox>
 
 #include <DLabel>
 #include <DGuiApplicationHelper>
@@ -172,6 +174,33 @@ void SpeedWidget::init()
     connect(m_timer, &QTimer::timeout, this, &SpeedWidget::onRunTime);
     m_timer->setInterval(1000);
     m_timer->start();
+}
+
+QString SpeedWidget::networkInfo()
+{
+    QString network("");
+    QList<QNetworkInterface> list = QNetworkInterface::allInterfaces();
+
+    if (list.isEmpty())
+        return "";
+
+    foreach (QNetworkInterface var, list) {
+        if (!var.isValid())
+            continue;
+
+        network.append("设备名称：" + var.humanReadableName() + "\n");
+        network.append("硬件地址：" + var.hardwareAddress() + "\n");
+
+        QList<QNetworkAddressEntry> entry = var.addressEntries();
+        foreach (QNetworkAddressEntry ent, entry) {
+            network.append("  IP 地址：" + ent.ip().toString() + "\n");
+            network.append("  子网掩码：" + ent.netmask().toString() + "\n");
+            network.append("  子网广播：" + ent.broadcast().toString() + "\n");
+        }
+
+        network.append("\n");
+    }
+    return network;
 }
 
 void SpeedWidget::onUpdateNet()
