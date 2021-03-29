@@ -98,3 +98,27 @@ set(CMAKE_INSTALL_PREFIX "/usr")
 
 # 设置执行 make install 时哪个目标应该被 install 到哪个位置
 install(TARGETS ${PLUGIN_NAME} LIBRARY DESTINATION lib/dde-dock/plugins)
+
+#Translation
+# set(TS_FILES /translations/lfxSpeed-en.ts /translations/lfxSpeed_es.ts)
+# set_source_files_properties(${TS_FILES} PROPERTIES OUTPUT_LOCATION "l10n")
+# qt5_add_translation(qmFiles ${TS_FILES})
+
+set(TS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/translations")
+
+set(TS_FILES
+    "${TS_DIR}/${PROJECT_NAME}_es_ES.ts"
+    "${TS_DIR}/${PROJECT_NAME}_en_EN.ts"
+)
+
+find_program(LUPDATE_EXECUTABLE lupdate)
+find_program(LRELEASE_EXECUTABLE lrelease)
+
+foreach(_ts_file ${TS_FILES})
+
+    execute_process(
+        COMMAND ${LUPDATE_EXECUTABLE} -recursive ${CMAKE_SOURCE_DIR} -ts ${_ts_file})
+    execute_process(
+        COMMAND ${LRELEASE_EXECUTABLE} ${_ts_file})
+
+endforeach()
