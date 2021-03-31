@@ -16,5 +16,7 @@ Homepage: https://github.com/xmuli/lfxSpeed
 Package: com.github.lfxspeed
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Replaces: lfxspeed
+Conflicts: lfxspeed
 Description: A lightweight and fast Internet speed plugin
  A light, fast plugins  in to show internet speed on Deepin V20 (dde-dock).
