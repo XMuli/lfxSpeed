@@ -45,7 +45,7 @@ void AboutDialog::init()
     QVBoxLayout *vLayout = new QVBoxLayout(content);
     vLayout->setContentsMargins(0, 0, 0, 0);
     vLayout->addSpacing(15);
-    DLabel *labVersion = new DLabel(tr("Version: 0.6.4  2021/03/25"));
+    DLabel *labVersion = new DLabel(tr("Version: 0.6.5  2021/03/31"));
     DLabel *labCopyright = new DLabel(tr("Copyright (c) 2021 By ifmet.cn"));
     vLayout->addWidget(labVersion, 0, Qt::AlignCenter);
     vLayout->addWidget(labCopyright, 0, Qt::AlignCenter);
@@ -67,7 +67,7 @@ void AboutDialog::init()
     labDonation->setText(tr("<a href=\"\">Donation"));
     DLabel *labAcknowledgements = new DLabel();
     labAcknowledgements->setOpenExternalLinks(true);
-    labAcknowledgements->setText(tr("<a href=https://github.com/justforlxz\">Thanks"));
+    labAcknowledgements->setText(tr("<a href=\"https://github.com/justforlxz\">Author"));
     hLayout->addWidget(labAuthor);
     hLayout->addWidget(labGithub);
     hLayout->addWidget(labLicense);
