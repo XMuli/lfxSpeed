@@ -69,6 +69,24 @@ SpeedWidget::SpeedWidget(SettingModel *model, QWidget *parent)
     connect(m_model, &SettingModel::sigShowDownChange, this, &SpeedWidget::onShowDown);
     connect(m_model, &SettingModel::sigShowCPUChange, this, &SpeedWidget::onShowCPU);
     connect(m_model, &SettingModel::sigShowMemChange, this, &SpeedWidget::onShowMem);
+
+    connect(DGuiApplicationHelper::instance(), &DGuiApplicationHelper::themeTypeChanged, this, [=]()
+    {
+        QPalette palette;
+        if (DGuiApplicationHelper::instance()->themeType() == DGuiApplicationHelper::ColorType::DarkType)
+            palette.setColor(QPalette::WindowText,Qt::white);
+        else
+            palette.setColor(QPalette::WindowText,Qt::black);
+
+        m_labUpload->setPalette(palette);
+        m_labDown->setPalette(palette);
+        m_labCpu->setPalette(palette);
+        m_labMemory->setPalette(palette);
+        m_numUpload->setPalette(palette);
+        m_numDown->setPalette(palette);
+        m_numCpu->setPalette(palette);
+        m_numMemory->setPalette(palette);
+    });
 }
 
 /*!

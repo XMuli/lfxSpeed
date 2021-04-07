@@ -14,9 +14,13 @@
         <translation type="unfinished">Un plugin que monitorea la velocidad de red ligero y rápido (DDE).</translation>
     </message>
     <message>
-        <location filename="../aboutdialog.cpp" line="48"/>
         <source>Version: 0.6.4  2021/03/25</source>
-        <translation type="unfinished">Versión: 0.6.4  2021/03/25</translation>
+        <translation type="obsolete">Versión: 0.6.4  2021/03/25</translation>
+    </message>
+    <message>
+        <location filename="../aboutdialog.cpp" line="48"/>
+        <source>Version: 0.6.5  2021/03/31</source>
+        <translation type="unfinished">Versión: 0.6.5  2021/03/31</translation>
     </message>
     <message>
         <location filename="../aboutdialog.cpp" line="49"/>
@@ -45,8 +49,12 @@
     </message>
     <message>
         <location filename="../aboutdialog.cpp" line="70"/>
+        <source>&lt;a href=&quot;https://github.com/justforlxz&quot;&gt;Author</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;a href=https://github.com/justforlxz&quot;&gt;Thanks</source>
-        <translation type="unfinished">&lt;a href=https://github.com/justforlxz&quot;&gt;Agradecimientos:</translation>
+        <translation type="obsolete">&lt;a href=https://github.com/justforlxz&quot;&gt;Agradecimientos:</translation>
     </message>
 </context>
 <context>
@@ -60,14 +68,14 @@
 <context>
     <name>SpeedWidget</name>
     <message>
-        <location filename="../speedwidget.cpp" line="97"/>
-        <location filename="../speedwidget.cpp" line="99"/>
+        <location filename="../speedwidget.cpp" line="115"/>
+        <location filename="../speedwidget.cpp" line="117"/>
         <source>0 Kb/s</source>
         <translation type="unfinished">0 Kb/s</translation>
     </message>
     <message>
-        <location filename="../speedwidget.cpp" line="101"/>
-        <location filename="../speedwidget.cpp" line="103"/>
+        <location filename="../speedwidget.cpp" line="119"/>
+        <location filename="../speedwidget.cpp" line="121"/>
         <source>0 %</source>
         <translation type="unfinished">0 %</translation>
     </message>

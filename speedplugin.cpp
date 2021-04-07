@@ -42,8 +42,8 @@ SpeedPlugin::SpeedPlugin(QObject *parent)
 
 const QString SpeedPlugin::pluginName() const
 {
-//    return QString("lfxSpeed");  datetime
-    return "lfxSpeed";  // 假装我也叫这个，否则会被压缩，在 1.2.3 版本中才被修改
+//    return QString("lfxSpeed");
+    return "datetime";  // Deepin 20.2 中第三方插件名会导致插件无法正常加载
 }
 
 void SpeedPlugin::init(PluginProxyInterface *proxyInter)
@@ -165,8 +165,10 @@ QWidget *SpeedPlugin::itemTipsWidget(const QString &itemKey)
  */
 void SpeedPlugin::onUpdateTip()
 {
-    m_labTip.setText(m_speedWidget->networkInfo()
-                     + m_speedWidget->m_runTime);
+    QStringList infoList;
+    infoList = QString(m_speedWidget->networkInfo() + m_speedWidget->m_runTime).split("\n");
+
+    m_labTip.setTextList(infoList);
 }
 
 void SpeedPlugin::onMouseTip(int status)

@@ -21,7 +21,7 @@
 #include <QObject>
 #include <pluginsiteminterface.h>
 #include <dtkwidget_global.h>
-#include "dlabel.h"
+#include "tipswidget.h"
 
 class QTimer;
 class SpeedInfo;
@@ -68,7 +68,7 @@ private:
     WinMain *m_winMain;
     SettingModel *m_model;
 
-    DLabel m_labTip;
+    Dock::TipsWidget m_labTip;
     QTimer m_timer;
     bool m_bMouseTip;
 };
