@@ -21,6 +21,7 @@
 #include <DMainWindow>
 #include <DTabWidget>
 #include <DCheckBox>
+#include <DComboBox>
 
 DWIDGET_BEGIN_NAMESPACE
 class DLineEdit;
@@ -56,6 +57,7 @@ signals:
     void sigShowMem(int status);
     void sigMousTip(int status);
     void sigUpAndDown(int status);
+    void sigOnlyOne(int status);
 
 private:
     DTabWidget *m_tab;

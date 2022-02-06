@@ -78,6 +78,22 @@ WinMain::WinMain(SettingModel *model, QWidget *parent)
     connect(this, &WinMain::sigShowDown, m_model, &SettingModel::sigShowDownChange);
     connect(this, &WinMain::sigShowCPU, m_model, &SettingModel::sigShowCPUChange);
     connect(this, &WinMain::sigShowMem, m_model, &SettingModel::sigShowMemChange);
+
+    connect(m_checkShowUp, &DCheckBox::stateChanged, this, &WinMain::sigOnlyOne);
+    connect(m_checkShowDown, &DCheckBox::stateChanged, this, &WinMain::sigOnlyOne);
+    connect(m_checkShowCPU, &DCheckBox::stateChanged, this, &WinMain::sigOnlyOne);
+    connect(m_checkShowMem, &DCheckBox::stateChanged, this, &WinMain::sigOnlyOne);
+
+    connect(this, &WinMain::sigOnlyOne, this, [&](){
+        bool bUp = m_checkShowUp->isChecked();
+        bool bDown = m_checkShowDown->isChecked();
+        bool bCPU = m_checkShowCPU->isChecked();
+        bool bMem = m_checkShowMem->isChecked();
+
+        if (!bUp && !bDown && !bCPU && !bMem)
+            m_checkShowMem->setCheckState(Qt::Checked);
+
+    });
 }
 
 void WinMain::init()

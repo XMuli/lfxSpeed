@@ -1,5 +1,5 @@
 # cmake 运行最低版本
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.2)
 
 # 使用 set 命令设置一个变量
 set(PLUGIN_NAME "lfxSpeed")
@@ -26,9 +26,20 @@ file(GLOB_RECURSE SRCS "*.h" "*.cpp" "*.json")
 # <库名>_DIR            在哪个目录下找到的（Qt5Widgets_DIR）
 # <库名>_INCLUDE_DIRS   有哪些头文件目录（Qt5Widgets_INCLUDE_DIRS）
 # <库名>_LIBRARIES      有哪些库文件（Qt5Widgets_LIBRARIES）
+#find_package(Qt5Widgets REQUIRED)
+#find_package(Qt5Network REQUIRED)
+#find_package(DtkWidget REQUIRED)
+
+find_package(PkgConfig REQUIRED)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Network REQUIRED)
+#find_package(Qt5Svg REQUIRED)
+#find_package(Qt5DBus REQUIRED)
 find_package(DtkWidget REQUIRED)
+#pkg_check_modules(DFrameworkDBus REQUIRED dframeworkdbus)
+
+#pkg_check_modules(DFrameworkDBus REQUIRED dframeworkdbus)
+#pkg_check_modules(QGSettings REQUIRED gsettings-qt)
 
 # find_package 命令还可以用来加载 cmake 的功能模块
 # 并不是所有的库都直接支持 cmake 查找的，但大部分都支持了 pkg-config 这个标准，
@@ -38,7 +49,7 @@ find_package(DtkWidget REQUIRED)
 # PKG_CONFIG_FOUND            pkg-config 可执行文件是否找到了
 # PKG_CONFIG_EXECUTABLE       pkg-config 可执行文件的路径
 # PKG_CONFIG_VERSION_STRING   pkg-config 的版本信息
-find_package(PkgConfig REQUIRED)
+#find_package(PkgConfig REQUIRED)
 
 # 加载 FindPkgConfig 模块后就可以使用 pkg_check_modules 命令加载需要的库
 # pkg_check_modules 命令是由 FindPkgConfig 模块提供的，因此要使用这个命令必须先加载 FindPkgConfig 模块。
@@ -47,7 +58,7 @@ find_package(PkgConfig REQUIRED)
 # DdeDockInterface_INCLUDE_DIRS
 # DdeDockInterface_LIBRARIES
 # 还有有另外的一些变量以及更灵活的用法，比如一次性查找多个库，这些请自行查找 cmake 文档学习。
-pkg_check_modules(DdeDockInterface REQUIRED dde-dock)
+#pkg_check_modules(DFrameworkDBus REQUIRED dframeworkdbus)
 
 # add_definitions 命令用于声明/定义一些编译/预处理参数
 # 根据 cmake 文档描述此命令已经有另外几个功能划分的更为细致的命令所取代，具体请查阅文档

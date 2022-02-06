@@ -45,8 +45,8 @@ void AboutDialog::init()
     QVBoxLayout *vLayout = new QVBoxLayout(content);
     vLayout->setContentsMargins(0, 0, 0, 0);
     vLayout->addSpacing(15);
-    DLabel *labVersion = new DLabel(tr("Version: 0.6.5  2021/03/31"));
-    DLabel *labCopyright = new DLabel(tr("Copyright (c) 2021 By ifmet.cn"));
+    DLabel *labVersion = new DLabel(tr("Version: 0.7  2022/02/06"));
+    DLabel *labCopyright = new DLabel(tr("Copyright (c) 2021 By XMuli"));
     vLayout->addWidget(labVersion, 0, Qt::AlignCenter);
     vLayout->addWidget(labCopyright, 0, Qt::AlignCenter);
     vLayout->addSpacing(15);
@@ -56,6 +56,9 @@ void AboutDialog::init()
     DLabel *labAuthor = new DLabel();
     labAuthor->setOpenExternalLinks(true);
     labAuthor->setText(tr("<a href=\"https://ifmet.cn\">Author"));
+    DLabel *labAcknowledgements = new DLabel();
+    labAcknowledgements->setOpenExternalLinks(true);
+    labAcknowledgements->setText(tr("<a href=\"https://github.com/justforlxz\">Thanks"));
     DLabel *labGithub = new DLabel();
     labGithub->setOpenExternalLinks(true);
     labGithub->setText(tr("<a href=\"https://github.com/xmuli/lfxSpeed\">GitHub"));
@@ -65,13 +68,15 @@ void AboutDialog::init()
     DLabel *labDonation = new DLabel();
     labDonation->setOpenExternalLinks(true);
     labDonation->setText(tr("<a href=\"\">Donation"));
-    DLabel *labAcknowledgements = new DLabel();
-    labAcknowledgements->setOpenExternalLinks(true);
-    labAcknowledgements->setText(tr("<a href=\"https://github.com/justforlxz\">Author"));
+    hLayout->addStretch(1);
     hLayout->addWidget(labAuthor);
+    hLayout->addWidget(labAcknowledgements);
     hLayout->addWidget(labGithub);
     hLayout->addWidget(labLicense);
-    hLayout->addWidget(labAcknowledgements);
+    hLayout->addStretch(1);
+    hLayout->setStretch(1, 1);
+    hLayout->setStretch(2, 1);
+    hLayout->setStretch(3, 1);
 
     vLayout->addLayout(hLayout);
     addContent(content);

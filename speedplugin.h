@@ -19,8 +19,9 @@
 #define SPEEDPLUGIN_H
 
 #include <QObject>
-#include <pluginsiteminterface.h>
-#include <dtkwidget_global.h>
+#include <DLabel>
+#include "pluginsiteminterface.h"
+#include "dtkwidget_global.h"
 #include "dlabel.h"
 
 class QTimer;
