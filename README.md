@@ -1,10 +1,9 @@
 # lfxSpeed
 <p align="right"><br><a href="README.md">English</a> | <a href="README.zh_CN.md">简体中文</a> | <a href="README.zh_TW.md">繁體中文</a></p>
 
- ![](https://img.shields.io/badge/language-c++-orange.svg) ![](https://img.shields.io/badge/language-Qt-orange.svg) ![](https://img.shields.io/github/license/xmuli/lfxSpeed) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/xmuli/lfxSpeed)  
+![](https://img.shields.io/github/license/XMuli/lfxSpeed) ![](https://img.shields.io/github/v/release/XMuli/lfxSpeed?style=flat&color=birightgreen) ![](https://img.shields.io/badge/powered%20by-XMuli-ff69b4) 
 
- ![GitHub All Releases](https://img.shields.io/github/downloads/xmuli/lfxSpeed/total)  ![GitHub stars](https://img.shields.io/github/stars/xmuli/lfxSpeed?style=social) ![GitHub forks](https://img.shields.io/github/forks/xmuli/lfxSpeed?style=social) 
-
+![](https://img.shields.io/github/languages/code-size/XMuli/lfxSpeed)  ![](https://img.shields.io/github/downloads/XMuli/lfxSpeed/total)  ![](https://img.shields.io/github/stars/XMuli/lfxSpeed?style=social) ![](https://img.shields.io/github/forks/XMuli/lfxSpeed?style=social&label=Fork)
 <br>
 
 A lightweight and fast Internet speed plugin. （**Recommended refactored version: [NetSpeed](https://github.com/xmuli/NetSpeed)** ）
