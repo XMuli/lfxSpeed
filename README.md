@@ -9,7 +9,12 @@
 A lightweight and fast Internet speed plugin. （**Recommended refactored version: [NetSpeed](https://github.com/xmuli/NetSpeed)** ）
 
 <img src="images/lfxSpeed.gif" alt="lfxSpeed" width="70%;" />
-<img src="https://fastly.jsdelivr.net/gh/XMuli/xmuliPic@pic/2024/202402192320479.png" width=70%"/>
+
+<br><br>
+
+## 上架 App Store
+
+<img src="https://fastly.jsdelivr.net/gh/XMuli/xmuliPic@pic/2024/202402192320479.png" width="100%"/>
 
 <br>
 
@@ -60,6 +65,7 @@ sudo rm -rf /usr/lib/dde-dock/plugins/liblfxSpeed.so
 ```
 
 <br>
+
 
 ### Author
 
