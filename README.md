@@ -6,15 +6,24 @@
 ![](https://img.shields.io/github/languages/code-size/XMuli/lfxSpeed)  ![](https://img.shields.io/github/downloads/XMuli/lfxSpeed/total)  ![](https://img.shields.io/github/stars/XMuli/lfxSpeed?style=social) ![](https://img.shields.io/github/forks/XMuli/lfxSpeed?style=social&label=Fork)
 <br>
 
+
+
+> **This item is included in**  [Product](https://product.xmuli.tech/)
+
+
+
 A lightweight and fast Internet speed plugin. （**Recommended refactored version: [NetSpeed](https://github.com/xmuli/NetSpeed)** ）
 
 <img src="images/lfxSpeed.gif" alt="lfxSpeed" width="70%;" />
 
 <br><br>
 
-## 上架 App Store
+## App Store
 
-<img src="https://fastly.jsdelivr.net/gh/XMuli/xmuliPic@pic/2024/202402192320479.png" width="100%"/>
+<img src="https://fastly.jsdelivr.net/gh/XMuli/xmuliPic@pic/2025/202506162340438.jpg" width="100%"/>
+
+<img src="https://fastly.jsdelivr.net/gh/XMuli/xmuliPic@pic/2025/202506162340352.jpg" width="100%"/>
+
 
 <br>
 
@@ -52,7 +61,7 @@ Or just use `IDE` to click the build button (not the run button) and copy the sh
 
 **Note:** If it doesn't take effect, you can execute `killall dde-dock` to restart the taskbar and it will take effect
 
-**Development Documentation:** [ifmet.cn](https://ifmet.cn/posts/c225b552) or [link](https://xmuli.blog.csdn.net/article/details/110672252)
+This technical blog post: [Deepin develops taskbar internet speed plugin lfxSpeed](https://xmuli.blog.csdn.net/article/details/110672252) or [mirror](https://xmuli.tech/posts/c225b552/)
 
 <br>
 

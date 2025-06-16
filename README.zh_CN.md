@@ -7,6 +7,10 @@
 
 <br>
 
+> **本项目已收录于** [Product](https://product.xmuli.tech/)
+
+
+
 一款轻巧、快速的网速插件。（**建议使用重构版本：[NetSpeed](https://github.com/xmuli/NetSpeed)** ）
 
 <img src="images/lfxSpeed.gif" alt="lfxSpeed" width="70%;" />
@@ -30,6 +34,16 @@
 <img src="https://cdn.jsdelivr.net/gh/xmuli/xmuliPic@pic/2021/20210325_133103.png" width="50%"/>   <img src="https://cdn.jsdelivr.net/gh/xmuli/xmuliPic@pic/2021/20210325_130838.png" width="40%"/>
 <br>
 
+<br>
+
+## App Store
+
+<img src="https://fastly.jsdelivr.net/gh/XMuli/xmuliPic@pic/2025/202506162340438.jpg" width="100%"/>
+
+<img src="https://fastly.jsdelivr.net/gh/XMuli/xmuliPic@pic/2025/202506162340352.jpg" width="100%"/>
+
+<br>
+
 ### 编译
 
 采用 `cmake` 构建，进入源码目录后，执行如下：
@@ -47,7 +61,7 @@ sudo make install
 
 **注意：** 若未生效，可执行 `killall dde-dock` 重启任务栏后生效
 
-**开发文档：**   [ifmet.cn](https://ifmet.cn/posts/c225b552) or [link](https://xmuli.blog.csdn.net/article/details/110672252)
+本篇技术博文：[Deepin 开发任务栏网速插件 lfxSpeed](https://xmuli.blog.csdn.net/article/details/110672252) 或  [镜像](https://xmuli.tech/posts/c225b552/) 
 
 <br>
 

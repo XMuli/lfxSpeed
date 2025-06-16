@@ -7,6 +7,11 @@
 
 <br>
 
+> **本專案已收錄於** [Product](https://product.xmuli.tech/)
+>
+
+
+
 一款輕巧、快速的網速外掛程式。（**建议使用重构版本：[NetSpeed](https://github.com/xmuli/NetSpeed)** ）
 
 <img src="images/lfxSpeed.gif" alt="lfxSpeed" width="70%;" />
@@ -29,6 +34,17 @@
 
 認為`DDE` 環境桌面很漂亮， `Deepin` 愛好者，同時也是開發者之一，看習慣了在其他系統上有一個任務欄網速外掛程式，但此 `Deepin v20 / UOS v20`上沒有，于是便有了這個項目。此適用于 `DDE` 桌面環境的 `Linux` 發行版、如 `Deepin / UOS `上。
 <img src="https://cdn.jsdelivr.net/gh/xmuli/xmuliPic@pic/2021/20210325_133103.png" width="50%"/>   <img src="https://cdn.jsdelivr.net/gh/xmuli/xmuliPic@pic/2021/20210325_130838.png" width="40%"/>
+
+<br>
+
+<br>
+
+## App Store
+
+<img src="https://fastly.jsdelivr.net/gh/XMuli/xmuliPic@pic/2025/202506162340438.jpg" width="100%"/>
+
+<img src="https://fastly.jsdelivr.net/gh/XMuli/xmuliPic@pic/2025/202506162340352.jpg" width="100%"/>
+
 <br>
 
 ### 編譯
@@ -48,7 +64,7 @@ sudo make install
 
 **注意：** 若未生效，可執行 `killall dde-dock` 重啟任務欄後生效
 
-**開發文檔：**  [ifmet.cn](https://ifmet.cn/posts/c225b552)  or [link](https://xmuli.blog.csdn.net/article/details/110672252)
+本篇技術博文：[Deepin 開發工作列網速外掛 lfxSpeed](https://xmuli.blog.csdn.net/article/details/110672252) 或  [映象](https://xmuli.tech/posts/c225b552/) 
 
 <br>
 
